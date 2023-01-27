@@ -20,11 +20,13 @@ const startGame = ()=>{
 
     //Cambio de Pantallas
         startScreenDOM.style.display = "none";
+        gameOverScreenDOM.style.display = "none";
         canvasContainer.style.display = "flex";
     // Crear el juego
-
+    game = new Game();
 
     // Iniciar el juego
+    game.gameLoop();
 }
 
 
@@ -34,3 +36,17 @@ const startGame = ()=>{
 
 
 startBtnDOM.addEventListener("click", startGame);
+restartBtnDOM.addEventListener("click", startGame);
+
+window.addEventListener("keydown", (event)=>{
+    if(event.code === "ArrowLeft"  && game.carDriver.x > 105){
+        game.carDriver.moveLeftCar();
+    }
+})
+
+window.addEventListener("keydown", (event)=>{
+    if(event.code === "ArrowRight" && game.carDriver.x+game.carDriver.w < 495){
+        game.carDriver.moveRightCar();
+    }
+})
+
