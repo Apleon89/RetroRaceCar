@@ -17,10 +17,16 @@ body {
     background-color: black;
     font-family: 'Press Start 2P', cursive;
     /* border-bottom: 2px solid red; */
-    width: 80vw;
+}
+#start-game,
+#game-over{
+    height: 650px;
+    width: 600px;
+    border: 2px solid rgb(255,196,59);
+    box-shadow: 1px 1px 5px rgb(255, 196, 59);
 }
 
-/* First Screen & GameOver Screen */
+/* First Screen */
 #start-game {
     display: flex;
     flex-direction: column;
@@ -45,7 +51,18 @@ button {
 /* Canvas */
 #canvas-container{
     display: none;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    height: 650px;
+    border: 2px solid rgb(255,196,59);
+    box-shadow: 1px 1px 5px rgb(255, 196, 59);
+}
+#canvas-container p {
+    color: rgb(255, 196, 59);
+    background-color: black;
+    padding: 0;
+
 }
 canvas{
     background-color: aliceblue;
@@ -60,3 +77,4 @@ canvas{
     align-items: center;
     justify-content: space-around;
 }
+

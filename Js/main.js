@@ -15,7 +15,14 @@ let game;
 
 
 // State Management Functions
-
+pause =()=>{
+    if(game.isGameOn === true){
+        game.isGameOn = false
+    } else {
+        game.isGameOn = true;
+        game.gameLoop()
+    }
+}
 const startGame = ()=>{
 
     //Cambio de Pantallas
@@ -34,19 +41,33 @@ const startGame = ()=>{
 
 // Add Event Listeners
 
-
+// Start Game
 startBtnDOM.addEventListener("click", startGame);
 restartBtnDOM.addEventListener("click", startGame);
+window.addEventListener("keydown", (event)=>{
+    if(event.code === "Space" && canvasContainer.style.display === "none"){
+        startGame();
+        game.purpleCarArr = [];
+        game.greenCarArr = [];
+        game.frames = 1;
+    }
+})
 
+// Controls Car
 window.addEventListener("keydown", (event)=>{
     if(event.code === "ArrowLeft"  && game.carDriver.x > 105){
         game.carDriver.moveLeftCar();
     }
 })
-
 window.addEventListener("keydown", (event)=>{
     if(event.code === "ArrowRight" && game.carDriver.x+game.carDriver.w < 495){
         game.carDriver.moveRightCar();
     }
 })
 
+// Pause
+window.addEventListener("keydown", (event)=>{
+    if(event.code === "KeyP"){
+        pause();
+    }
+});

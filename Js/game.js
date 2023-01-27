@@ -5,6 +5,7 @@ class Game {
         this.bg = new Image();
         this.bg.src = ("../Img/bg-1.png");
         this.carDriver = new Car();
+        this.carArr = [];
         this.purpleCarArr = [];
         this.greenCarArr = [];
         this.frames = 1;
@@ -35,8 +36,6 @@ class Game {
             this.purpleCarArr.shift();
         } else if (this.greenCarArr[0].y > 600){
             this.greenCarArr.shift();
-            console.log(this.purpleCarArr.length)
-            console.log(this.greenCarArr.length)
         }
     }
     colissionPurpleCheck=()=>{
@@ -79,6 +78,8 @@ class Game {
         //2. Movimientos de los coches
         this.carDriver.moveLeftCar();
         this.carDriver.moveRightCar();
+
+        
         this.purpleCarsAppear();
         this.purpleCarArr.forEach((eachPurpleCar)=>{
             eachPurpleCar.movePurpleCar();
@@ -94,6 +95,8 @@ class Game {
         //3. Dibujado de los elementos
         this.drawBg();
         this.carDriver.drawCar();
+
+
         this.purpleCarArr.forEach((eachPurpleCar)=>{
             eachPurpleCar.drawPurpleCar();
         });
