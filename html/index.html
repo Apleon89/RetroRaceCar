@@ -19,7 +19,11 @@
         <div class="container">
             <div id="canvas-container">
                 <canvas id="canvas" width="600" height="600"></canvas>
-                <p> Score: <span> 0 </span></p>
+                <div id="bottom-bar">
+                    <p id="score"> Score: <span> 0 </span></p>
+                    <p id="max-score">Max score: <span>0</span></p>
+                    <p id="lives">Lives: <span>0</span></p>
+                </div>
                 <audio class="audio-juego" src="../audio/Daddy (8 Bit Version).mp3" controls=""></audio>
             </div>
         </div>
@@ -37,6 +41,7 @@
     <script src="../Js/bg.js"></script>
     <script src="../Js/car1.js"></script>
     <script src="../Js/enemyCars.js"></script>
+    <script src="../Js/wrenchLives.js"></script>
     <script src="../Js/purpleCars.js"></script>
     <script src="../Js/greenCars.js"></script>
 

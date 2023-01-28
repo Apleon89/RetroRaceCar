@@ -23,7 +23,6 @@ class EnemyCars {
         } else {
             this.speed = 2.5
         }
-        this.move = 10;
         this.image = new Image();
         if(color === 0) {
             this.image.src = ("../Img/Car_Purple.png");

@@ -5,6 +5,9 @@ let startBtnDOM = document.querySelector("#start-game button");
 let gameOverScreenDOM = document.querySelector("#game-over");
 let restartBtnDOM = document.querySelector("#game-over button");
 let audioJuego = document.querySelector(".audio-juego");
+let scoreDOM = document.querySelector("#score span");
+let scoreMaxDOM = document.querySelector("#max-score span");
+let livesCounterDOM = document.querySelector("#lives span")
 let canvasContainer = document.querySelector("#canvas-container");
 let canvas = document.querySelector("#canvas")
 
@@ -79,6 +82,7 @@ window.addEventListener("keydown", (event)=>{
         game.carDriver.moveUpCar();
     } 
 })
+// Deceleration
 window.addEventListener("keydown", (event)=>{
     if(event.code === "ArrowDown" && game.carDriver.y <= 480) {
         game.carDriver.y += game.carDriver.speed;

@@ -58,6 +58,11 @@ button {
     border: 2px solid rgb(255,196,59);
     box-shadow: 1px 1px 5px rgb(255, 196, 59);
 }
+#bottom-bar{
+    display: flex;
+    gap: 25px;
+    
+}
 #canvas-container p {
     color: rgb(255, 196, 59);
     background-color: black;
