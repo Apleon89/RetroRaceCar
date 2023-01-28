@@ -2,8 +2,10 @@ class Game {
 
     constructor() {
         this.isGameOn = true;
-        this.bg = new Image();
-        this.bg.src = ("../Img/bg-1.png");
+        // this.bg = new Image();
+        // this.bg.src = ("../Img/bg-1.png");
+        this.bgArr = [new Bg(-15), new Bg(-615)];
+
         this.carDriver = new Car();
         this.carArr = [];
         this.purpleCarArr = [];
@@ -14,8 +16,16 @@ class Game {
     clearCanvas=()=>{
         context.clearRect(0, 0, canvas.width, canvas.height); 
     }
-    drawBg=()=>{
-        context.drawImage(this.bg, 0, 0, canvas.width, canvas.height);     
+    // drawBg=()=>{
+    //     context.drawImage(this.bg, 0, 0, canvas.width, canvas.height);     
+    // }
+    highwayMovement =()=>{
+        if(this.frames % 60 === 0){
+            this.bgArr.push(new Bg(-615))
+            
+        } else if( this.bgArr[0].y > 600){
+            this.bgArr.shift();
+        }
     }
     purpleCarsAppear=()=>{
         if(this.purpleCarArr.length === 0 || this.frames % 240 === 0){
@@ -75,7 +85,13 @@ class Game {
         this.clearCanvas();
 
 
-        //2. Movimientos de los coches
+        //2. Movimientos del juego
+
+        this.highwayMovement();
+        this.bgArr.forEach((eachBg)=>{
+            eachBg.moveBg();
+        })
+
         this.carDriver.moveLeftCar();
         this.carDriver.moveRightCar();
 
@@ -93,7 +109,12 @@ class Game {
 
 
         //3. Dibujado de los elementos
-        this.drawBg();
+
+        // this.drawBg();
+        this.bgArr.forEach((eachBg)=>{
+            eachBg.drawBg();
+        })
+
         this.carDriver.drawCar();
 
 
