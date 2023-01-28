@@ -67,7 +67,9 @@ button {
 canvas{
     background-color: aliceblue;
 }
-
+.audio-juego{
+    display: none;
+}
 
 /* GameOver */
 #game-over{

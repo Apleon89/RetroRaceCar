@@ -17,11 +17,11 @@ class GreenCar {
 
     }
 
-    drawGreenCar(){
+    drawGreenCar=()=>{
         context.drawImage(this.image, this.x, this.y, this.w, this.h);
         
     }
-    moveGreenCar() {
+    moveGreenCar=()=> {
         this.y += this.speed;
     }
 }

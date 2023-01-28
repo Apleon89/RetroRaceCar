@@ -1,16 +1,21 @@
 class Bg {
     constructor(posY){
         this.y = posY;
-        this.speed = 5;
+        this.speed;
         this.bg = new Image();
         this.bg.src = ("../Img/bg-1.png")
         
     }
 
-    drawBg(){
+    drawBg=()=>{
         context.drawImage(this.bg, 0, this.y, canvas.width, canvas.height+30);
     }
-    moveBg(){
+    moveBg=()=>{
+        this.speed = 10;
+        this.y += this.speed;
+    }
+    addBgVelocity=()=>{
+        // this.speed = 6;
         this.y += this.speed;
     }
 }

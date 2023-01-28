@@ -17,11 +17,11 @@ class PurpleCar {
 
     }
 
-    drawPurpleCar(){
+    drawPurpleCar=()=>{
         context.drawImage(this.image, this.x, this.y, this.w, this.h);
         
     }
-    movePurpleCar() {
+    movePurpleCar=()=> {
         this.y += this.speed;
     }
 }

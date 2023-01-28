@@ -27,50 +27,84 @@ class Game {
             this.bgArr.shift();
         }
     }
-    purpleCarsAppear=()=>{
-        if(this.purpleCarArr.length === 0 || this.frames % 240 === 0){
-            let ramdomNum = Math.floor(Math.random() * 2);
+    
+    // purpleCarsAppear=()=>{
+    //     if(this.purpleCarArr.length === 0 || this.frames % 240 === 0){
+    //         let ramdomNum = Math.floor(Math.random() * 2);
             
-            this.purpleCarArr.push(new PurpleCar(ramdomNum));
-        }
-    }
-    greenCarsAppear=()=>{
-        if(this.greenCarArr.length === 0 || this.frames % 180 === 0){
-            let ramdomNum = Math.floor(Math.random() * 2);
+    //         this.purpleCarArr.push(new PurpleCar(ramdomNum));
+    //     }
+    // }
+
+    // greenCarsAppear=()=>{
+    //     if(this.greenCarArr.length === 0 || this.frames % 180 === 0){
+    //         let ramdomNum = Math.floor(Math.random() * 2);
             
-            this.greenCarArr.push(new GreenCar(ramdomNum));
-        }
-    }
-    oldCarsDisappear=()=>{
-        if(this.purpleCarArr[0].y > 600){
-            this.purpleCarArr.shift();
-        } else if (this.greenCarArr[0].y > 600){
-            this.greenCarArr.shift();
-        }
-    }
-    colissionPurpleCheck=()=>{
-        this.purpleCarArr.forEach((eachPurpleCar)=>{
-            if(this.carDriver.x < eachPurpleCar.x + eachPurpleCar.w &&
-                this.carDriver.x + this.carDriver.w > eachPurpleCar.x &&
-                this.carDriver.y < eachPurpleCar.y + eachPurpleCar.h &&
-                this.carDriver.h + this.carDriver.y > eachPurpleCar.y){
-                    this.gameOver();
-                };
-        });
+    //         this.greenCarArr.push(new GreenCar(ramdomNum));
+    //     }
+    // }
+    enemyCarsAppear=()=>{
+        let ramdomNumForFrame = Math.floor(Math.random() * 2);
+        let ramdomNumWayCar = Math.floor(Math.random() * 4);
+        // let ramdomNumForSpeed = Math.floor(Math.random() * 2);
+        let ramdomNumForColor = Math.floor(Math.random() * 2);
+        let framesCarAppear;
+        
+        if(ramdomNumForFrame === 0){
+            framesCarAppear = 240
+        } else {
+            framesCarAppear = 180
+        };
+
+        if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
+            this.carArr.push(new EnemyCars(ramdomNumWayCar, ramdomNumForColor));
+        };
+        
     };
-    colissionGreenCheck=()=>{
-        this.greenCarArr.forEach((eachGreenCar)=>{
-            if(this.carDriver.x < eachGreenCar.x + eachGreenCar.w &&
-                this.carDriver.x + this.carDriver.w > eachGreenCar.x &&
-                this.carDriver.y < eachGreenCar.y + eachGreenCar.h &&
-                this.carDriver.h + this.carDriver.y > eachGreenCar.y){
+    oldCarsDisappear=()=>{
+        // if(this.purpleCarArr[0].y > 600){
+        //     this.purpleCarArr.shift();
+        // } else if (this.greenCarArr[0].y > 600){
+        //     this.greenCarArr.shift();
+        // }
+        if(this.carArr[0].y > 600){
+            this.carArr.shift();
+            console.log(this.carArr.length)
+        } 
+    }
+    // colissionPurpleCheck=()=>{
+    //     this.purpleCarArr.forEach((eachPurpleCar)=>{
+    //         if(this.carDriver.x < eachPurpleCar.x + eachPurpleCar.w &&
+    //             this.carDriver.x + this.carDriver.w > eachPurpleCar.x &&
+    //             this.carDriver.y < eachPurpleCar.y + eachPurpleCar.h &&
+    //             this.carDriver.h + this.carDriver.y > eachPurpleCar.y){
+    //                 this.gameOver();
+    //             };
+    //     });
+    // };
+    // colissionGreenCheck=()=>{
+    //     this.greenCarArr.forEach((eachGreenCar)=>{
+    //         if(this.carDriver.x < eachGreenCar.x + eachGreenCar.w &&
+    //             this.carDriver.x + this.carDriver.w > eachGreenCar.x &&
+    //             this.carDriver.y < eachGreenCar.y + eachGreenCar.h &&
+    //             this.carDriver.h + this.carDriver.y > eachGreenCar.y){
+    //                 this.gameOver();
+    //             };
+    //     });
+    // };
+    colissionCheck=()=>{
+        this.carArr.forEach((eachCar)=>{
+            if(this.carDriver.x < eachCar.x + eachCar.w &&
+                this.carDriver.x + this.carDriver.w > eachCar.x &&
+                this.carDriver.y < eachCar.y + eachCar.h &&
+                this.carDriver.h + this.carDriver.y > eachCar.y){
                     this.gameOver();
                 };
         });
     };
     gameOver=()=>{
         this.isGameOn = false;
-
+        audioJuego.pause();
         canvasContainer.style.display = "none";
         gameOverScreenDOM.style.display = "flex";
     };
@@ -94,19 +128,25 @@ class Game {
 
         this.carDriver.moveLeftCar();
         this.carDriver.moveRightCar();
+        this.carDriver.moveBottomCar();
 
         
-        this.purpleCarsAppear();
-        this.purpleCarArr.forEach((eachPurpleCar)=>{
-            eachPurpleCar.movePurpleCar();
-        });
-        this.greenCarsAppear();
-        this.greenCarArr.forEach((eachGreenCar)=>{
-            eachGreenCar.moveGreenCar();
-        });
-        this.colissionPurpleCheck();
-        this.colissionGreenCheck();
+        // this.purpleCarsAppear();
+        // this.purpleCarArr.forEach((eachPurpleCar)=>{
+        //     eachPurpleCar.movePurpleCar();
+        // });
+        // this.greenCarsAppear();
+        // this.greenCarArr.forEach((eachGreenCar)=>{
+        //     eachGreenCar.moveGreenCar();
+        // });
+        // this.colissionPurpleCheck();
+        // this.colissionGreenCheck();
 
+        this.enemyCarsAppear();
+        this.carArr.forEach((eachCar)=>{
+            eachCar.moveEnemyCar();
+        });
+        this.colissionCheck();
 
         //3. Dibujado de los elementos
 
@@ -118,12 +158,17 @@ class Game {
         this.carDriver.drawCar();
 
 
-        this.purpleCarArr.forEach((eachPurpleCar)=>{
-            eachPurpleCar.drawPurpleCar();
+        // this.purpleCarArr.forEach((eachPurpleCar)=>{
+        //     eachPurpleCar.drawPurpleCar();
+        // });
+        // this.greenCarArr.forEach((eachGreenCar)=>{
+        //     eachGreenCar.drawGreenCar();
+        // });
+        this.enemyCarsAppear();
+        this.carArr.forEach((eachCar)=>{
+            eachCar.drawEnemyCar();
         });
-        this.greenCarArr.forEach((eachGreenCar)=>{
-            eachGreenCar.drawGreenCar();
-        });
+
         this.oldCarsDisappear();
 
         //4. Recursion
