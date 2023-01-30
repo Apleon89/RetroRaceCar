@@ -49,14 +49,18 @@ class Game {
         let ramdomNumForFrame = Math.floor(Math.random() * 2);
         let ramdomNumWayCar = Math.floor(Math.random() * 4);
         // let ramdomNumForSpeed = Math.floor(Math.random() * 2);
-        let ramdomNumForColor = Math.floor(Math.random() * 2);
+        let ramdomNumForColor = Math.floor(Math.random() * 3);
         let framesCarAppear;
         
         if(ramdomNumForFrame === 0){
             framesCarAppear = 240
+        } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 0) {
+            framesCarAppear = 120
+        } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 1 ) {
+            framesCarAppear = 60
         } else {
             framesCarAppear = 180
-        };
+        } ;
 
         if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
             this.carArr.push(new EnemyCars(ramdomNumWayCar, ramdomNumForColor));
@@ -101,13 +105,14 @@ class Game {
                 this.carDriver.h + this.carDriver.y > eachCar.y){
                     this.lives -= 1;
                     this.carArr.splice(index,1);
+                    audioCrash.play();
                     this.gameOver();
                 };
         });
     };
     wrenchAppear=()=>{
         let ramdomNumWayWrench = Math.floor(Math.random() * 4);
-        if(this.frames % 300 === 0){
+        if(this.frames % 900 === 0 && this.lives < 4){
             this.wrenchArr.push(new Wrench(ramdomNumWayWrench))
         }
     }
@@ -120,7 +125,7 @@ class Game {
                 this.carDriver.h + this.carDriver.y > eachWrench.y && this.lives < 4){
                     this.wrenchArr.splice(index,1);
                     this.lives++
-                    console.log(this.lives)
+                    audioLiveUp.play();
                   
                 }
         })
@@ -128,24 +133,25 @@ class Game {
     oldWrenchDisappear=()=>{
         if(this.wrenchArr.length > 3){
             this.wrenchArr.shift();
-            console.log(this.wrenchArr.length)
         } 
     }
     
     gameOver=()=>{
-        console.log(this.lives)
         if(this.lives === 0){
             this.isGameOn = false;
             audioJuego.pause();
             canvasContainer.style.display = "none";
+            audioGameOver.play();
             gameOverScreenDOM.style.display = "flex"; 
         }
         
     };
     scoreCounter=()=>{
+        scoreMaxDOM.innerText = localStorage.maxScore;
         scoreDOM.innerText = Math.floor(this.frames / 50);
         if(scoreDOM.innerText > Number(scoreMaxDOM.innerText)){
             scoreMaxDOM.innerText = scoreDOM.innerText;
+            localStorage.maxScore = scoreMaxDOM.innerText;
         }
     };
 
@@ -191,11 +197,9 @@ class Game {
         this.wrenchArr.forEach((eachWrench)=>{
             eachWrench.moveWrench()
         })
-        this.oldWrenchDisappear();
 
         //3. Dibujado de los elementos
 
-        // this.drawBg();
         this.bgArr.forEach((eachBg)=>{
             eachBg.drawBg();
         })
@@ -217,6 +221,7 @@ class Game {
             eachWrench.drawWrench();
         })
         this.oldCarsDisappear();
+        this.oldWrenchDisappear();
         this.scoreCounter();
 
         //4. Recursion

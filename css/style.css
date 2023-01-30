@@ -5,6 +5,8 @@
 body {
     margin: 0;
     background-color: rgb(22, 18, 18);
+    background-position: center;
+    
 }
 .flex-container {
     display: flex;
@@ -72,7 +74,9 @@ button {
 canvas{
     background-color: aliceblue;
 }
-.audio-juego{
+.audio-juego,
+.audio-choque,
+.audio-game-over{
     display: none;
 }
 

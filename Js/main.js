@@ -5,6 +5,9 @@ let startBtnDOM = document.querySelector("#start-game button");
 let gameOverScreenDOM = document.querySelector("#game-over");
 let restartBtnDOM = document.querySelector("#game-over button");
 let audioJuego = document.querySelector(".audio-juego");
+let audioCrash = document.querySelector(".audio-choque");
+let audioGameOver = document.querySelector(".audio-game-over");
+let audioLiveUp = document.querySelector(".audio-live");
 let scoreDOM = document.querySelector("#score span");
 let scoreMaxDOM = document.querySelector("#max-score span");
 let livesCounterDOM = document.querySelector("#lives span")
@@ -63,12 +66,12 @@ window.addEventListener("keydown", (event)=>{
 
 // Controls Car Left & Right
 window.addEventListener("keydown", (event)=>{
-    if(event.code === "ArrowLeft"  && game.carDriver.x > 105){
+    if(event.code === "ArrowLeft"  && game.carDriver.x > 130){
         game.carDriver.moveLeftCar();
     }
 })
 window.addEventListener("keydown", (event)=>{
-    if(event.code === "ArrowRight" && game.carDriver.x+game.carDriver.w < 495){
+    if(event.code === "ArrowRight" && game.carDriver.x+game.carDriver.w < 410){
         game.carDriver.moveRightCar();
     }
 })
@@ -96,4 +99,7 @@ window.addEventListener("keydown", (event)=>{
     }
 });
 
+// Local Storage
+let maxScore;
+localStorage.setItem(maxScore, scoreMaxDOM.innerText);
 

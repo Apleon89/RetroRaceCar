@@ -2,14 +2,14 @@
 class Car {
 
     constructor() {
-        this.x = 305; //salida: 305  
+        this.x = 310; //salida: 310  
         this.y = 480;
         this.w = 60;
         this.h = 110;
-        this.speed = 4;
-        this.move = 20;
+        this.speed = 6;
+        this.move = 95;
         this.image = new Image();
-        this.image.src = ("../Img/Car_Red.png")
+        this.image.src = ("../Img/Car_Orange.png")
 
     }
 
@@ -20,9 +20,10 @@ class Car {
 
     moveLeftCar=()=>{
         this.x -= this.move;
+        
     }
     moveRightCar=()=> {
-        this.x += this.move;
+       this.x += this.move;
     }
     moveUpCar=()=>{
         // if (this.y >= 450){

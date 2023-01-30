@@ -26,8 +26,10 @@ class EnemyCars {
         this.image = new Image();
         if(color === 0) {
             this.image.src = ("../Img/Car_Purple.png");
-        } else {
+        } else if (color === 1) {
             this.image.src = ("../Img/Car_Green.png"); 
+        } else {
+            this.image.src= ("../Img/Car_Red.png");
         }
 
     }
