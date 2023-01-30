@@ -28,13 +28,22 @@ body {
     box-shadow: 1px 1px 5px rgb(255, 196, 59);
 }
 
+#btn-mute{
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+#btn-mute input{
+    width: 5%;
+}
+
+
 /* First Screen */
 #start-game {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
     align-items: center;
-    justify-content: space-around;
 }
 #start-game h1,
 #game-over h1 {
@@ -43,11 +52,17 @@ body {
     font-size: 2.5rem;
 }
 
-button {
+button,
+input {
     font-family: 'Press Start 2P', cursive;
     background-color: rgb(255, 196, 59);
     padding: 5px;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
+}
+#start-game div{
+    color: rgb(234, 184, 67);
+    font-size: 0.5rem;
+    padding-bottom: 5px;
 }
 
 /* Canvas */
@@ -84,8 +99,27 @@ canvas{
 #game-over{
     display: none;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
     align-items: center;
-    justify-content: space-around;
+}
+.instruccions {
+    color: rgb(234, 184, 67);
+    font-size: 0.5rem;
+    margin: 0;
+    padding: 0; 
+}
+#totalScore {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(255, 196, 59);
+    margin: 0;
+    padding: 0;
+    row-gap: 10px;
+}
+
+#totalScore p {
+    padding: 0;
+    margin: 0;
 }
 

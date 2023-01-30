@@ -2,14 +2,13 @@ class Game {
 
     constructor() {
         this.isGameOn = true;
-        // this.bg = new Image();
-        // this.bg.src = ("../Img/bg-1.png");
         this.bgArr = [new Bg(-15), new Bg(-615)];
         this.wrenchArr = [];
         this.carDriver = new Car();
         this.carArr = [];
-        this.purpleCarArr = [];
-        this.greenCarArr = [];
+        this.crashImg = new CrashImg();
+        // this.purpleCarArr = [];
+        // this.greenCarArr = [];
         this.lives = 2;
         this.frames = 1;
         
@@ -17,7 +16,7 @@ class Game {
 
     clearCanvas=()=>{
         context.clearRect(0, 0, canvas.width, canvas.height); 
-    }
+    };
     // drawBg=()=>{
     //     context.drawImage(this.bg, 0, 0, canvas.width, canvas.height);     
     // }
@@ -28,7 +27,7 @@ class Game {
         } else if( this.bgArr[0].y > 600){
             this.bgArr.shift();
         }
-    }
+    };
     
     // purpleCarsAppear=()=>{
     //     if(this.purpleCarArr.length === 0 || this.frames % 240 === 0){
@@ -52,17 +51,29 @@ class Game {
         let ramdomNumForColor = Math.floor(Math.random() * 3);
         let framesCarAppear;
         
-        if(ramdomNumForFrame === 0){
-            framesCarAppear = 240
+        if(ramdomNumForFrame === 0 && scoreDOM.innerText < 50){
+            framesCarAppear = 245
+        } else if (ramdomNumForFrame === 1 && scoreDOM.innerText < 50){
+            framesCarAppear = 180
         } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 0) {
-            framesCarAppear = 120
+            framesCarAppear = 125
         } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 1 ) {
             framesCarAppear = 60
-        } else {
-            framesCarAppear = 180
         } ;
 
-        if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
+        let posXcheck; 
+        if(ramdomNumWayCar === 0){
+            posXcheck = 130
+          } else if (ramdomNumWayCar === 1) {
+            posXcheck = 220
+          } else if (ramdomNumWayCar === 2){
+            posXcheck = 310
+          } else if (ramdomNumWayCar === 3) {
+            posXcheck = 410
+          };
+        
+
+        if(this.carArr.length === 0 || this.frames % framesCarAppear === 0 && this.carArr[this.carArr.length-1].x !== posXcheck) {
             this.carArr.push(new EnemyCars(ramdomNumWayCar, ramdomNumForColor));
         };
         
@@ -73,10 +84,10 @@ class Game {
         // } else if (this.greenCarArr[0].y > 600){
         //     this.greenCarArr.shift();
         // }
-        if(this.carArr[0].y > 600){
+        if(this.carArr[0].y > canvas.height){
             this.carArr.shift();
         } 
-    }
+    };
     // colissionPurpleCheck=()=>{
     //     this.purpleCarArr.forEach((eachPurpleCar)=>{
     //         if(this.carDriver.x < eachPurpleCar.x + eachPurpleCar.w &&
@@ -110,12 +121,13 @@ class Game {
                 };
         });
     };
+    
     wrenchAppear=()=>{
         let ramdomNumWayWrench = Math.floor(Math.random() * 4);
         if(this.frames % 900 === 0 && this.lives < 4){
             this.wrenchArr.push(new Wrench(ramdomNumWayWrench))
         }
-    }
+    };
     wrenchColissionCheck=()=>{
         livesCounterDOM.innerText = this.lives
         this.wrenchArr.forEach((eachWrench, index)=>{
@@ -134,15 +146,18 @@ class Game {
         if(this.wrenchArr.length > 3){
             this.wrenchArr.shift();
         } 
-    }
+    };
     
     gameOver=()=>{
         if(this.lives === 0){
             this.isGameOn = false;
             audioJuego.pause();
+            audioJuego.currentTime = 0;
             canvasContainer.style.display = "none";
             audioGameOver.play();
             gameOverScreenDOM.style.display = "flex"; 
+            scoreGameOver.innerText = `Score: ${scoreDOM.innerText}`;
+            maxScoreGameOver.innerText = `Max Score: ${scoreMaxDOM.innerText}`;
         }
         
     };
@@ -223,6 +238,7 @@ class Game {
         this.oldCarsDisappear();
         this.oldWrenchDisappear();
         this.scoreCounter();
+
 
         //4. Recursion
 
