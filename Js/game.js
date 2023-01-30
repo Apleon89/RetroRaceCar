@@ -51,9 +51,9 @@ class Game {
         let ramdomNumForColor = Math.floor(Math.random() * 3);
         let framesCarAppear;
         
-        if(ramdomNumForFrame === 0 && scoreDOM.innerText < 50){
+        if( scoreDOM.innerText < 50 && ramdomNumForFrame === 0 ){
             framesCarAppear = 245
-        } else if (ramdomNumForFrame === 1 && scoreDOM.innerText < 50){
+        } else if ( scoreDOM.innerText < 50 && ramdomNumForFrame === 1 ){
             framesCarAppear = 180
         } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 0) {
             framesCarAppear = 125
@@ -61,22 +61,19 @@ class Game {
             framesCarAppear = 60
         } ;
 
-        let posXcheck; 
-        if(ramdomNumWayCar === 0){
-            posXcheck = 130
-          } else if (ramdomNumWayCar === 1) {
-            posXcheck = 220
-          } else if (ramdomNumWayCar === 2){
-            posXcheck = 310
-          } else if (ramdomNumWayCar === 3) {
-            posXcheck = 410
-          };
-        
+        let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor)
+       
 
-        if(this.carArr.length === 0 || this.frames % framesCarAppear === 0 && this.carArr[this.carArr.length-1].x !== posXcheck) {
-            this.carArr.push(new EnemyCars(ramdomNumWayCar, ramdomNumForColor));
+        if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
+            // if(this.carArr.at(-1).x < newCar.x + newCar.w &&
+            //     this.carArr.at(-1).x + this.carArr.at(-1).w > newCar.x &&
+            //     this.carArr.at(-1).y < newCar.y + newCar.h &&
+            //     this.carArr.at(-1).h + this.carArr.at(-1).y > newCar.y){
+            //         this.enemyCarsAppear();
+            //     } else {
+                    this.carArr.push(newCar);
+                // } 
         };
-        
     };
     oldCarsDisappear=()=>{
         // if(this.purpleCarArr[0].y > 600){
@@ -117,6 +114,15 @@ class Game {
                     this.lives -= 1;
                     this.carArr.splice(index,1);
                     audioCrash.play();
+                    this.crashImg.x = 0;
+                    let counter = 0;
+                    let showRedScreen = setInterval(()=>{
+                        counter +=1
+                        this.crashImg.x = -600;
+                        if (counter === 1){
+                            clearInterval(showRedScreen)
+                        }
+                    }, 300);
                     this.gameOver();
                 };
         });
@@ -238,6 +244,7 @@ class Game {
         this.oldCarsDisappear();
         this.oldWrenchDisappear();
         this.scoreCounter();
+        this.crashImg.drawCrashImg();
 
 
         //4. Recursion

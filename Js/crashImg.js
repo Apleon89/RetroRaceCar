@@ -1,5 +1,11 @@
 class CrashImg {
 
+    constructor(){
+        this.x = -600;
+        this.y = 0;
+        this.w = 600;
+        this.h = 600;
+    }
 
 
 
@@ -7,19 +13,9 @@ class CrashImg {
     
     drawCrashImg=()=>{
         context.fillStyle ='#c71f05';
-        context.fillRect(0,0,canvas.width,canvas.height);
+        context.fillRect(this.x , this.y ,this.w ,this.h);
 
     }
 
     
-    crashImgAppear=()=>{
-        let crashCounter = 0;
-                    let crashInterval = setInterval(()=>{
-                        
-                        if(crashCounter > 1){
-                            clearInterval(crashInterval)
-                        }
-                        crashCounter++
-                    }, 1000);
-    }
 }

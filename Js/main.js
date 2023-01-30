@@ -22,10 +22,10 @@ const context = canvas.getContext('2d');
 let game;
 
 //Audio Volume 
-audioJuego.volume = 0.01;
-audioCrash.volume = 0.01;
-audioGameOver.volume = 0.01;
-audioLiveUp.volume = 0.01;
+audioJuego.volume = 0.03;
+audioCrash.volume = 0.05;
+audioGameOver.volume = 0.02;
+audioLiveUp.volume = 0.05;
 
 // DOM manipulation
 let scoreGameOver = document.createElement("p");
@@ -42,7 +42,7 @@ let instruccionsDivDOM = document.createElement("div");
 startScreenDOM.append(instruccionsDivDOM);
 let gameInstruccions = document.createElement("h4");
 instruccionsDivDOM.append(gameInstruccions);
-gameInstruccions.innerText = "Intruccions:"
+gameInstruccions.innerText = "Instructions:"
 let leftRightInstruccions = document.createElement("p");
 instruccionsDivDOM.append(leftRightInstruccions);
 leftRightInstruccions.innerText = "Press ⇦ ⇨ to move left & right.";
@@ -54,7 +54,7 @@ instruccionsDivDOM.append(pauseInstruccions);
 pauseInstruccions.innerText = "Press P to Pause."
 
 let restartInstruccions = document.createElement("p");
-restartInstruccions.innerText = "...or push Space to restart";
+restartInstruccions.innerText = "...or press Space to restart";
 restartInstruccions.classList.add("instruccions");
 gameOverScreenDOM.append(restartInstruccions);
 
@@ -80,10 +80,10 @@ mute =()=>{
         audioLiveUp.volume = 0.00;
         muteBtnDOM.src = ("../Img/Sound Off.png");
     } else {
-        audioJuego.volume = 0.01;
-        audioCrash.volume = 0.01;
-        audioGameOver.volume = 0.01;
-        audioLiveUp.volume = 0.01;
+        audioJuego.volume = 0.03;
+        audioCrash.volume = 0.05;
+        audioGameOver.volume = 0.02;
+        audioLiveUp.volume = 0.05;
         muteBtnDOM.src = ("../Img/Sound On.png");
     }
 }
