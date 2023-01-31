@@ -11,15 +11,13 @@ class Game {
         // this.greenCarArr = [];
         this.lives = 2;
         this.frames = 1;
+        this.framesCarAppear;
         
     }
 
     clearCanvas=()=>{
         context.clearRect(0, 0, canvas.width, canvas.height); 
     };
-    // drawBg=()=>{
-    //     context.drawImage(this.bg, 0, 0, canvas.width, canvas.height);     
-    // }
     highwayMovement =()=>{
         if(this.frames % 60 === 0){
             this.bgArr.push(new Bg(-615))
@@ -44,37 +42,73 @@ class Game {
     //         this.greenCarArr.push(new GreenCar(ramdomNum));
     //     }
     // }
-    enemyCarsAppear=()=>{
-        let ramdomNumForFrame = Math.floor(Math.random() * 2);
-        let ramdomNumWayCar = Math.floor(Math.random() * 4);
-        // let ramdomNumForSpeed = Math.floor(Math.random() * 2);
-        let ramdomNumForColor = Math.floor(Math.random() * 3);
-        let framesCarAppear;
+    // enemyCarsAppear=()=>{
+    //     let ramdomNumForFrame = Math.floor(Math.random() * 2);
+    //     let ramdomNumWayCar = Math.floor(Math.random() * 4);
+    //     // let ramdomNumForSpeed = Math.floor(Math.random() * 2);
+    //     let ramdomNumForColor = Math.floor(Math.random() * 3);
+    //     let framesCarAppear;
         
-        if( scoreDOM.innerText < 50 && ramdomNumForFrame === 0 ){
-            framesCarAppear = 245
-        } else if ( scoreDOM.innerText < 50 && ramdomNumForFrame === 1 ){
-            framesCarAppear = 180
-        } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 0) {
-            framesCarAppear = 125
-        } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 1 ) {
-            framesCarAppear = 60
-        } ;
+    //     if( scoreDOM.innerText < 50 && ramdomNumForFrame === 0 ){
+    //         framesCarAppear = 247
+    //     } else if ( scoreDOM.innerText < 50 && ramdomNumForFrame === 1 ){
+    //         framesCarAppear = 181
+    //     } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 0) {
+    //         framesCarAppear = 123
+    //     } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 1 ) {
+    //         framesCarAppear = 61
+    //     } ;
 
-        let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor)
+    //     let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor)
        
 
-        if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
-            // if(this.carArr.at(-1).x < newCar.x + newCar.w &&
-            //     this.carArr.at(-1).x + this.carArr.at(-1).w > newCar.x &&
-            //     this.carArr.at(-1).y < newCar.y + newCar.h &&
-            //     this.carArr.at(-1).h + this.carArr.at(-1).y > newCar.y){
-            //         this.enemyCarsAppear();
-            //     } else {
+    //     if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
+    //         if(this.carArr.length === 0){
+    //             this.carArr.push(newCar);
+    //         }
+    //         else if( this.carArr.at(-1).x < newCar.x + newCar.w &&
+    //             this.carArr.at(-1).x + this.carArr.at(-1).w > newCar.x &&
+    //             this.carArr.at(-1).y < newCar.y + newCar.h &&
+    //             this.carArr.at(-1).h + this.carArr.at(-1).y > newCar.y ){
+    //                 this.enemyCarsAppear();
+    //             } else {
+    //                 this.carArr.push(newCar);
+    //         }
+    //     };
+    // };
+    enemyCarsAppear=()=>{
+        // let ramdomNumForFrame = Math.floor(Math.random() * 2);
+        let ramdomNumWayCar = Math.floor(Math.random() * 4);
+        let ramdomNumForColor = Math.floor(Math.random() * 3);
+        
+
+        if( Math.floor(this.frames / 50) < 50 ){
+            this.framesCarAppear = 130 // 240
+        } else if ( Math.floor(this.frames / 50) > 50 ) {
+            this.framesCarAppear = 100 // 180
+         } else if ( Math.floor(this.frames / 50) > 100 ) {
+            this.framesCarAppear = 80  // 120       
+        } 
+        
+
+        let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor)
+        
+        if(this.carArr.length === 0 || this.frames % this.framesCarAppear === 0) {
+            if(this.carArr.length === 0){
+                this.carArr.push(newCar);
+            }
+            else if( this.carArr.at(-1).x < newCar.x + newCar.w &&
+                this.carArr.at(-1).x + this.carArr.at(-1).w > newCar.x &&
+                this.carArr.at(-1).y < newCar.y + newCar.h &&
+                this.carArr.at(-1).h + this.carArr.at(-1).y > newCar.y ){
+                    this.enemyCarsAppear();
+                } else {
                     this.carArr.push(newCar);
-                // } 
+            }
         };
+        
     };
+
     oldCarsDisappear=()=>{
         // if(this.purpleCarArr[0].y > 600){
         //     this.purpleCarArr.shift();
@@ -111,9 +145,6 @@ class Game {
                 this.carDriver.x + this.carDriver.w > eachCar.x &&
                 this.carDriver.y < eachCar.y + eachCar.h &&
                 this.carDriver.h + this.carDriver.y > eachCar.y){
-                    this.lives -= 1;
-                    this.carArr.splice(index,1);
-                    audioCrash.play();
                     this.crashImg.x = 0;
                     let counter = 0;
                     let showRedScreen = setInterval(()=>{
@@ -123,6 +154,9 @@ class Game {
                             clearInterval(showRedScreen)
                         }
                     }, 300);
+                    this.lives -= 1;
+                    this.carArr.splice(index,1);
+                    audioCrash.play();
                     this.gameOver();
                 };
         });
@@ -169,18 +203,21 @@ class Game {
     };
     scoreCounter=()=>{
         scoreMaxDOM.innerText = localStorage.maxScore;
+        // scoreMaxDOM.innerText = scoreDOM.innerText;
         scoreDOM.innerText = Math.floor(this.frames / 50);
         if(scoreDOM.innerText > Number(scoreMaxDOM.innerText)){
             scoreMaxDOM.innerText = scoreDOM.innerText;
             localStorage.maxScore = scoreMaxDOM.innerText;
         }
+        // localStorage.clear();
+
     };
 
 
 
     gameLoop=()=>{
         
-        this.frames++
+        this.frames++;
         //1. Limpiar el canvas
         this.clearCanvas();
 

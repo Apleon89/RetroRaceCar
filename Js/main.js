@@ -17,15 +17,17 @@ let allAudioDOM = document.querySelectorAll("audio");
 let canvasContainer = document.querySelector("#canvas-container");
 let canvas = document.querySelector("#canvas")
 
+
+
 const context = canvas.getContext('2d');
 
 let game;
 
 //Audio Volume 
-audioJuego.volume = 0.03;
-audioCrash.volume = 0.05;
-audioGameOver.volume = 0.02;
-audioLiveUp.volume = 0.05;
+audioJuego.volume = 0.1;
+audioCrash.volume = 0.1;
+audioGameOver.volume = 0.1;
+audioLiveUp.volume = 0.1;
 
 // DOM manipulation
 let scoreGameOver = document.createElement("p");
@@ -73,17 +75,17 @@ pause =()=>{
     }
 }
 mute =()=>{
-    if (audioJuego.volume === 0.01) {
+    if (audioJuego.volume !== 0.00) {
         audioJuego.volume = 0.00;
         audioCrash.volume = 0.00;
         audioGameOver.volume = 0.00;
         audioLiveUp.volume = 0.00;
         muteBtnDOM.src = ("../Img/Sound Off.png");
     } else {
-        audioJuego.volume = 0.03;
-        audioCrash.volume = 0.05;
-        audioGameOver.volume = 0.02;
-        audioLiveUp.volume = 0.05;
+        audioJuego.volume = 0.1;
+        audioCrash.volume = 0.1;
+        audioGameOver.volume = 0.1;
+        audioLiveUp.volume = 0.1;
         muteBtnDOM.src = ("../Img/Sound On.png");
     }
 }
