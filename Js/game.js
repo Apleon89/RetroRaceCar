@@ -7,6 +7,7 @@ class Game {
         this.carDriver = new Car();
         this.carArr = [];
         this.crashImg = new CrashImg();
+        this.liveUp = new LiveImg();
         // this.purpleCarArr = [];
         // this.greenCarArr = [];
         this.lives = 2;
@@ -147,11 +148,11 @@ class Game {
                 this.carDriver.h + this.carDriver.y > eachCar.y){
                     this.crashImg.x = 0;
                     let counter = 0;
-                    let showRedScreen = setInterval(()=>{
+                    let showCrashImg = setInterval(()=>{
                         counter +=1
                         this.crashImg.x = -600;
                         if (counter === 1){
-                            clearInterval(showRedScreen)
+                            clearInterval(showCrashImg)
                         }
                     }, 300);
                     this.lives -= 1;
@@ -175,6 +176,15 @@ class Game {
                 this.carDriver.x + this.carDriver.w > eachWrench.x &&
                 this.carDriver.y < eachWrench.y + eachWrench.h &&
                 this.carDriver.h + this.carDriver.y > eachWrench.y && this.lives < 4){
+                    this.liveUp.x = 0;
+                    let counter = 0;
+                    let showLiveUp = setInterval(()=>{
+                        counter +=1
+                        this.liveUp.x = -600;
+                        if (counter === 1){
+                            clearInterval(showLiveUp)
+                        }
+                    }, 300);
                     this.wrenchArr.splice(index,1);
                     this.lives++
                     audioLiveUp.play();
@@ -282,6 +292,7 @@ class Game {
         this.oldWrenchDisappear();
         this.scoreCounter();
         this.crashImg.drawCrashImg();
+        this.liveUp.drawLiveUp();
 
 
         //4. Recursion
