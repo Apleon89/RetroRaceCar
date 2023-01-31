@@ -8,6 +8,7 @@ class Game {
         this.carArr = [];
         this.crashImg = new CrashImg();
         this.liveUp = new LiveImg();
+        this.levelUp = new LevelUp();
         // this.purpleCarArr = [];
         // this.greenCarArr = [];
         this.lives = 2;
@@ -197,6 +198,20 @@ class Game {
             this.wrenchArr.shift();
         } 
     };
+    levelUpImgAppear=()=>{
+        if(Math.floor(this.frames / 50) === 50 || Math.floor(this.frames / 50) === 100 ){
+            audioLevelUp.play();
+            this.levelUp.x = 150;
+                    let counter = 0;
+                    let showLevelUp = setInterval(()=>{
+                        counter +=1
+                        this.levelUp.x = -300;
+                        if (counter === 1){
+                            clearInterval(showLevelUp)
+                        }
+                    }, 10);
+        }
+    }
     
     gameOver=()=>{
         if(this.lives === 0){
@@ -265,6 +280,7 @@ class Game {
         this.wrenchArr.forEach((eachWrench)=>{
             eachWrench.moveWrench()
         })
+        this.levelUpImgAppear();
 
         //3. Dibujado de los elementos
 
@@ -293,6 +309,7 @@ class Game {
         this.scoreCounter();
         this.crashImg.drawCrashImg();
         this.liveUp.drawLiveUp();
+        this.levelUp.drawLevelUp();
 
 
         //4. Recursion

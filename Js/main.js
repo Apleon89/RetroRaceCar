@@ -8,6 +8,7 @@ let audioJuego = document.querySelector(".audio-juego");
 let audioCrash = document.querySelector(".audio-choque");
 let audioGameOver = document.querySelector(".audio-game-over");
 let audioLiveUp = document.querySelector(".audio-live");
+let audioLevelUp = document.querySelector(".audio-level-up");
 let scoreDOM = document.querySelector("#score span");
 let scoreMaxDOM = document.querySelector("#max-score span");
 let livesCounterDOM = document.querySelector("#lives span");
@@ -28,6 +29,7 @@ audioJuego.volume = 0.1;
 audioCrash.volume = 0.1;
 audioGameOver.volume = 0.1;
 audioLiveUp.volume = 0.1;
+audioLevelUp.volume = 0.1;
 
 // DOM manipulation
 let scoreGameOver = document.createElement("p");
@@ -53,7 +55,7 @@ instruccionsDivDOM.append(gasBreakInstruccions);
 gasBreakInstruccions.innerText = "Press ⇧ ⇩ to acelerate & break."
 let pauseInstruccions = document.createElement("p");
 instruccionsDivDOM.append(pauseInstruccions);
-pauseInstruccions.innerText = "Press P to Pause."
+pauseInstruccions.innerText = "Press P to Pause & press M to mute audio."
 
 let restartInstruccions = document.createElement("p");
 restartInstruccions.innerText = "...or press Space to restart";
@@ -80,12 +82,14 @@ mute =()=>{
         audioCrash.volume = 0.00;
         audioGameOver.volume = 0.00;
         audioLiveUp.volume = 0.00;
+        audioLevelUp.volume = 0.0;
         muteBtnDOM.src = ("../Img/Sound Off.png");
     } else {
         audioJuego.volume = 0.1;
         audioCrash.volume = 0.1;
         audioGameOver.volume = 0.1;
         audioLiveUp.volume = 0.1;
+        audioLevelUp.volume = 0.1;
         muteBtnDOM.src = ("../Img/Sound On.png");
     }
 }
@@ -160,6 +164,11 @@ window.addEventListener("keydown", (event)=>{
 
 // Mute
 muteBtnDOM.addEventListener("click", mute)
+window.addEventListener("keydown", (event)=>{
+    if(event.code === "KeyM"){
+        mute();
+    }
+})
 
 // Local Storage
 let maxScore;
