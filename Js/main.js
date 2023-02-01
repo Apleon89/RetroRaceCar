@@ -21,6 +21,7 @@ const context = canvas.getContext("2d");
 let game;
 
 //Audio Volume
+
 audioJuego.volume = 0.05;
 audioCrash.volume = 0.05;
 audioGameOver.volume = 0.05;
@@ -28,6 +29,7 @@ audioLiveUp.volume = 0.05;
 audioLevelUp.volume = 0.05;
 
 // DOM manipulation
+
 let scoreGameOver = document.createElement("p");
 totalScoreGameOverDOM.append(scoreGameOver);
 let maxScoreGameOver = document.createElement("p");
@@ -58,12 +60,9 @@ restartInstruccions.innerText = "...or press Space to restart";
 restartInstruccions.classList.add("instruccions");
 gameOverScreenDOM.append(restartInstruccions);
 
-// const controller = {
-//     38: {pressed: false, func: game.carDriver.moveUpCar()},
-//     40: {pressed: false, func: game.carDriver.moveBottomCar()}
-// }
 
 // State Management Functions
+
 pause = () => {
   if (game.isGameOn === true) {
     game.isGameOn = false;
@@ -93,6 +92,7 @@ mute = () => {
 };
 
 const startGame = () => {
+
   //Cambio de Pantallas
   startScreenDOM.style.display = "none";
   gameOverScreenDOM.style.display = "none";
@@ -165,16 +165,6 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
-// document.addEventListener("keydown", (e) => {
-//     if(controller[e.keyCode]){
-//       controller[e.keyCode].pressed = true
-//     }
-//   })
-//   document.addEventListener("keyup", (e) => {
-//     if(controller[e.keyCode]){
-//       controller[e.keyCode].pressed = false
-//     }
-//   })
 
 // Pause
 window.addEventListener("keydown", (event) => {
@@ -194,3 +184,4 @@ window.addEventListener("keydown", (event) => {
 // Local Storage
 let maxScore;
 localStorage.setItem(maxScore, scoreMaxDOM.innerText);
+localStorage.maxScore = 0
