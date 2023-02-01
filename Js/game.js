@@ -112,11 +112,11 @@ class Game {
         this.carDriver.y < eachCar.y + eachCar.h &&
         this.carDriver.h + this.carDriver.y > eachCar.y
       ) {
-        this.crashImg.x = 0;
+        this.crashImg.x = 150;
         let counter = 0;
         let showCrashImg = setInterval(() => {
           counter += 1;
-          this.crashImg.x = -600;
+          this.crashImg.x = -300;
           if (counter === 1) {
             clearInterval(showCrashImg);
           }
@@ -146,11 +146,11 @@ class Game {
         this.carDriver.h + this.carDriver.y > eachWrench.y &&
         this.lives < 4
       ) {
-        this.liveUp.x = 0;
+        this.liveUp.x = 150;
         let counter = 0;
         let showLiveUp = setInterval(() => {
           counter += 1;
-          this.liveUp.x = -600;
+          this.liveUp.x = -300;
           if (counter === 1) {
             clearInterval(showLiveUp);
           }
@@ -223,9 +223,6 @@ class Game {
     this.bgArr.forEach((eachBg) => {
       eachBg.moveBg();
     });
-
-    this.carDriver.moveLeftCar();
-    this.carDriver.moveRightCar();
     this.carDriver.moveUpCar();
     this.carDriver.brakeCar();
     this.enemyCarsAppear();

@@ -112,10 +112,10 @@ startBtnDOM.addEventListener("click", startGame);
 restartBtnDOM.addEventListener("click", startGame);
 window.addEventListener("keydown", (event) => {
   if (event.code === "Space" && canvasContainer.style.display === "none") {
-    startGame();
     game.purpleCarArr = [];
     game.greenCarArr = [];
     game.frames = 1;
+    startGame();
   }
 });
 
@@ -148,17 +148,13 @@ window.addEventListener("keyup", (event) => {
 // Deceleration
 window.addEventListener("keydown", (event) => {
   if (
-    event.code === "ArrowDown" &&
-    game.carDriver.y + game.carDriver.h <= 590
-  ) {
+    event.code === "ArrowDown") {
     game.carDriver.pressedBottom = true;
   }
 });
 window.addEventListener("keyup", (event) => {
   if (
-    event.code === "ArrowDown" &&
-    game.carDriver.y + game.carDriver.h <= 590
-  ) {
+    event.code === "ArrowDown") {
     game.carDriver.pressedBottom = false;
   }
 });

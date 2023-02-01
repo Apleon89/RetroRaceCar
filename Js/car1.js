@@ -1,11 +1,11 @@
 class Car {
   constructor() {
-    this.x = 310; //salida: 310
+    this.x = 313; //salida: 310
     this.y = 480;
     this.w = 60;
     this.h = 110;
     this.speed = 1.5;
-    this.move = 95;
+    this.move = 93;
     this.image = new Image();
     this.image.src = "./Img/Car_Orange.png";
     this.pressedUp = false;
@@ -30,9 +30,9 @@ class Car {
   };
   brakeCar = () => {
     if (this.pressedBottom === true && this.y + this.h <= 590) {
-      this.y += this.speed - 0.5;
+      this.y += this.speed - 0.3;
     } else if ( this.y + this.h <= 590 ) {
-      this.y += 0.3;
+      this.y += 0.5;
     }
   };
  
