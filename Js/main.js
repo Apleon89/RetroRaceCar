@@ -121,13 +121,13 @@ window.addEventListener("keydown", (event) => {
 
 // Controls Car Left & Right
 window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowLeft" && game.carDriver.x > 130) {
+  if (event.code === "ArrowLeft" || event.code === "KeyA" && game.carDriver.x > 130) {
     game.carDriver.moveLeftCar();
   }
 });
 window.addEventListener("keydown", (event) => {
   if (
-    event.code === "ArrowRight" &&
+    event.code === "ArrowRight"  || event.code === "KeyD" &&
     game.carDriver.x + game.carDriver.w < 410
   ) {
     game.carDriver.moveRightCar();
@@ -136,23 +136,23 @@ window.addEventListener("keydown", (event) => {
 
 // Aceleration
 window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowUp") {
+  if (event.code === "ArrowUp" || event.code === "KeyW") {
     game.carDriver.pressedUp = true;
   }
 });
 window.addEventListener("keyup", (event) => {
-  if (event.code === "ArrowUp") {
+  if (event.code === "ArrowUp" || event.code === "KeyW") {
     game.carDriver.pressedUp = false;
   }
 });
 // Deceleration
 window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowDown") {
+  if (event.code === "ArrowDown" || event.code === "KeyS") {
     game.carDriver.pressedBottom = true;
   }
 });
 window.addEventListener("keyup", (event) => {
-  if (event.code === "ArrowDown") {
+  if (event.code === "ArrowDown" || event.code === "KeyS") {
     game.carDriver.pressedBottom = false;
   }
 });
