@@ -121,9 +121,9 @@ class Game {
             clearInterval(showCrashImg);
           }
         }, 300);
-        this.lives -= 1;
         this.carArr.splice(index, 1);
         audioCrash.play();
+        this.lives --;
         this.gameOver();
       }
     });
@@ -189,6 +189,8 @@ class Game {
   gameOver = () => {
     if (this.lives === 0) {
       this.isGameOn = false;
+      audioCrash.pause();
+      audioCrash.currentTime = 0;
       audioJuego.pause();
       audioJuego.currentTime = 0;
       canvasContainer.style.display = "none";
