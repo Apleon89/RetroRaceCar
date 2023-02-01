@@ -1,40 +1,45 @@
-
 class Car {
+  constructor() {
+    this.x = 310; //salida: 310
+    this.y = 480;
+    this.w = 60;
+    this.h = 110;
+    this.speed = 1.5;
+    this.move = 95;
+    this.image = new Image();
+    this.image.src = "./Img/Car_Orange.png";
+    this.pressedUp = false;
+    this.pressedBottom = false;
+  }
 
-    constructor() {
-        this.x = 310; //salida: 310  
-        this.y = 480;
-        this.w = 60;
-        this.h = 110;
-        this.speed = 6;
-        this.move = 95;
-        this.image = new Image();
-        this.image.src = ("../Img/Car_Orange.png")
-
+  drawCar = () => {
+    context.drawImage(this.image, this.x, this.y, this.w, this.h);
+  };
+  moveLeftCar = () => {
+    this.x -= this.move;
+  };
+  moveRightCar = () => {
+    this.x += this.move;
+  };
+  moveUpCar = () => {
+    if (this.y >= 450) {
+      this.y -= this.speed;
     }
 
-    drawCar=()=>{
-        context.drawImage(this.image, this.x, this.y, this.w, this.h);
-        
+    if (this.pressedUp === true && this.y > 0) {
+      this.y -= this.speed;
     }
 
-    moveLeftCar=()=>{
-        this.x -= this.move;
-        
+    // this.y -= this.speed;
+  };
+  brakeCar = () => {
+    if (this.pressedBottom === true) {
+      this.y += this.speed - 0.5;
     }
-    moveRightCar=()=> {
-       this.x += this.move;
+  };
+  moveBottomCar = () => {
+    if (this.y + this.h <= 530) {
+      this.y += 0.3;
     }
-    moveUpCar=()=>{
-        // if (this.y >= 450){
-        // this.y -= this.speed;
-        // }
-        this.y -= this.speed;
-    }
-    moveBottomCar=()=>{
-        if(this.y <= 480){
-            this.y += 0.3
-        }
-    }
-    
+  };
 }

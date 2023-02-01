@@ -16,20 +16,16 @@ let totalScoreGameOverDOM = document.querySelector("#totalScore");
 let muteDivDOM = document.querySelector("#btn-mute");
 let allAudioDOM = document.querySelectorAll("audio");
 let canvasContainer = document.querySelector("#canvas-container");
-let canvas = document.querySelector("#canvas")
-
-
-
-const context = canvas.getContext('2d');
-
+let canvas = document.querySelector("#canvas");
+const context = canvas.getContext("2d");
 let game;
 
-//Audio Volume 
-audioJuego.volume = 0.1;
-audioCrash.volume = 0.1;
-audioGameOver.volume = 0.1;
-audioLiveUp.volume = 0.1;
-audioLevelUp.volume = 0.1;
+//Audio Volume
+audioJuego.volume = 0.05;
+audioCrash.volume = 0.05;
+audioGameOver.volume = 0.05;
+audioLiveUp.volume = 0.05;
+audioLevelUp.volume = 0.05;
 
 // DOM manipulation
 let scoreGameOver = document.createElement("p");
@@ -38,139 +34,163 @@ let maxScoreGameOver = document.createElement("p");
 totalScoreGameOverDOM.append(maxScoreGameOver);
 
 let muteBtnDOM = document.createElement("input");
-muteDivDOM.append(muteBtnDOM)
+muteDivDOM.append(muteBtnDOM);
 muteBtnDOM.type = "image";
-muteBtnDOM.src = ("../Img/Sound On.png");
+muteBtnDOM.src = "./Img/Sound On.png";
 muteBtnDOM.onclick = "mute()";
 let instruccionsDivDOM = document.createElement("div");
 startScreenDOM.append(instruccionsDivDOM);
 let gameInstruccions = document.createElement("h4");
 instruccionsDivDOM.append(gameInstruccions);
-gameInstruccions.innerText = "Instructions:"
+gameInstruccions.innerText = "Instructions:";
 let leftRightInstruccions = document.createElement("p");
 instruccionsDivDOM.append(leftRightInstruccions);
 leftRightInstruccions.innerText = "Press ⇦ ⇨ to move left & right.";
 let gasBreakInstruccions = document.createElement("p");
 instruccionsDivDOM.append(gasBreakInstruccions);
-gasBreakInstruccions.innerText = "Press ⇧ ⇩ to acelerate & break."
+gasBreakInstruccions.innerText = "Press ⇧ ⇩ to acelerate & brake.";
 let pauseInstruccions = document.createElement("p");
 instruccionsDivDOM.append(pauseInstruccions);
-pauseInstruccions.innerText = "Press P to Pause & press M to mute audio."
+pauseInstruccions.innerText = "Press P to Pause & press M to mute audio.";
 
 let restartInstruccions = document.createElement("p");
 restartInstruccions.innerText = "...or press Space to restart";
 restartInstruccions.classList.add("instruccions");
 gameOverScreenDOM.append(restartInstruccions);
 
-
-
+// const controller = {
+//     38: {pressed: false, func: game.carDriver.moveUpCar()},
+//     40: {pressed: false, func: game.carDriver.moveBottomCar()}
+// }
 
 // State Management Functions
-pause =()=>{
-    if(game.isGameOn === true){
-        game.isGameOn = false
-        audioJuego.pause();
-    } else {
-        game.isGameOn = true;
-        game.gameLoop();
-        audioJuego.play();
-    }
-}
-mute =()=>{
-    if (audioJuego.volume !== 0.00) {
-        audioJuego.volume = 0.00;
-        audioCrash.volume = 0.00;
-        audioGameOver.volume = 0.00;
-        audioLiveUp.volume = 0.00;
-        audioLevelUp.volume = 0.0;
-        muteBtnDOM.src = ("../Img/Sound Off.png");
-    } else {
-        audioJuego.volume = 0.1;
-        audioCrash.volume = 0.1;
-        audioGameOver.volume = 0.1;
-        audioLiveUp.volume = 0.1;
-        audioLevelUp.volume = 0.1;
-        muteBtnDOM.src = ("../Img/Sound On.png");
-    }
-}
-
-const startGame = ()=>{
-
-    //Cambio de Pantallas
-        startScreenDOM.style.display = "none";
-        gameOverScreenDOM.style.display = "none";
-        canvasContainer.style.display = "flex";
-        audioGameOver.pause();
-        audioGameOver.currentTime = 0;
-        audioJuego.play();
-    // Crear el juego
-    game = new Game();
-
-    // Iniciar el juego
+pause = () => {
+  if (game.isGameOn === true) {
+    game.isGameOn = false;
+    audioJuego.pause();
+  } else {
+    game.isGameOn = true;
     game.gameLoop();
-}
+    audioJuego.play();
+  }
+};
+mute = () => {
+  if (audioJuego.volume !== 0.0) {
+    audioJuego.volume = 0.0;
+    audioCrash.volume = 0.0;
+    audioGameOver.volume = 0.0;
+    audioLiveUp.volume = 0.0;
+    audioLevelUp.volume = 0.0;
+    muteBtnDOM.src = "./Img/Sound Off.png";
+  } else {
+    audioJuego.volume = 0.05;
+    audioCrash.volume = 0.05;
+    audioGameOver.volume = 0.05;
+    audioLiveUp.volume = 0.05;
+    audioLevelUp.volume = 0.05;
+    muteBtnDOM.src = "./Img/Sound On.png";
+  }
+};
 
+const startGame = () => {
+  //Cambio de Pantallas
+  startScreenDOM.style.display = "none";
+  gameOverScreenDOM.style.display = "none";
+  canvasContainer.style.display = "flex";
+  audioGameOver.pause();
+  audioGameOver.currentTime = 0;
+  audioJuego.play();
+  // Crear el juego
+  game = new Game();
 
-
+  // Iniciar el juego
+  game.gameLoop();
+};
 
 // Add Event Listeners
 
 // Start Game
 startBtnDOM.addEventListener("click", startGame);
 restartBtnDOM.addEventListener("click", startGame);
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "Space" && canvasContainer.style.display === "none"){
-        startGame();
-        game.purpleCarArr = [];
-        game.greenCarArr = [];
-        game.frames = 1;
-    }
-})
+window.addEventListener("keydown", (event) => {
+  if (event.code === "Space" && canvasContainer.style.display === "none") {
+    startGame();
+    game.purpleCarArr = [];
+    game.greenCarArr = [];
+    game.frames = 1;
+  }
+});
 
 // Controls Car Left & Right
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "ArrowLeft"  && game.carDriver.x > 130){
-        game.carDriver.moveLeftCar();
-    }
-})
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "ArrowRight" && game.carDriver.x+game.carDriver.w < 410){
-        game.carDriver.moveRightCar();
-    }
-})
+window.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowLeft" && game.carDriver.x > 130) {
+    game.carDriver.moveLeftCar();
+  }
+});
+window.addEventListener("keydown", (event) => {
+  if (
+    event.code === "ArrowRight" &&
+    game.carDriver.x + game.carDriver.w < 410
+  ) {
+    game.carDriver.moveRightCar();
+  }
+});
 
 // Aceleration
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "ArrowUp"){
-        // game.bgArr.forEach(eachBb => {
-        //     eachBb.addBgVelocity()
-        // });
-        game.carDriver.moveUpCar();
-    } 
-})
+window.addEventListener("keydown", (event) => {
+  if (event.code === "ArrowUp") {
+    game.carDriver.pressedUp = true;
+  }
+});
+window.addEventListener("keyup", (event) => {
+  if (event.code === "ArrowUp") {
+    game.carDriver.pressedUp = false;
+  }
+});
 // Deceleration
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "ArrowDown" && game.carDriver.y <= 480) {
-        game.carDriver.y += game.carDriver.speed;
-    }
-})
+window.addEventListener("keydown", (event) => {
+  if (
+    event.code === "ArrowDown" &&
+    game.carDriver.y + game.carDriver.h <= 530
+  ) {
+    game.carDriver.pressedBottom = true;
+  }
+});
+window.addEventListener("keyup", (event) => {
+  if (
+    event.code === "ArrowDown" &&
+    game.carDriver.y + game.carDriver.h <= 530
+  ) {
+    game.carDriver.pressedBottom = false;
+  }
+});
+
+// document.addEventListener("keydown", (e) => {
+//     if(controller[e.keyCode]){
+//       controller[e.keyCode].pressed = true
+//     }
+//   })
+//   document.addEventListener("keyup", (e) => {
+//     if(controller[e.keyCode]){
+//       controller[e.keyCode].pressed = false
+//     }
+//   })
 
 // Pause
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "KeyP"){
-        pause();
-    }
+window.addEventListener("keydown", (event) => {
+  if (event.code === "KeyP") {
+    pause();
+  }
 });
 
 // Mute
-muteBtnDOM.addEventListener("click", mute)
-window.addEventListener("keydown", (event)=>{
-    if(event.code === "KeyM"){
-        mute();
-    }
-})
+muteBtnDOM.addEventListener("click", mute);
+window.addEventListener("keydown", (event) => {
+  if (event.code === "KeyM") {
+    mute();
+  }
+});
 
 // Local Storage
 let maxScore;
 localStorage.setItem(maxScore, scoreMaxDOM.innerText);
-

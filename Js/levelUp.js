@@ -5,7 +5,7 @@ class LevelUp {
         this.w = 300;
         this.h = 300;
         this.image = new Image();
-        this.image.src = ("../Img/levelUp.png")
+        this.image.src = ("./Img/levelUp.png")
     }
 
     drawLevelUp =()=>{
