@@ -22,24 +22,18 @@ class Car {
     this.x += this.move;
   };
   moveUpCar = () => {
-    if (this.y >= 590) {
-      this.y -= this.speed;
-    }
-
+    
     if (this.pressedUp === true && this.y > 0) {
       this.y -= this.speed;
     }
 
-    // this.y -= this.speed;
   };
   brakeCar = () => {
     if (this.pressedBottom === true && this.y + this.h <= 590) {
       this.y += this.speed - 0.5;
-    }
-  };
-  moveBottomCar = () => {
-    if (this.y + this.h <= 590) {
+    } else if ( this.y + this.h <= 590 ) {
       this.y += 0.3;
     }
   };
+ 
 }

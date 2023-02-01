@@ -224,7 +224,6 @@ class Game {
     this.carDriver.moveRightCar();
     this.carDriver.moveUpCar();
     this.carDriver.brakeCar();
-    this.carDriver.moveBottomCar();
     this.enemyCarsAppear();
     this.carArr.forEach((eachCar) => {
       eachCar.moveEnemyCar();
