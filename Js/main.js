@@ -121,13 +121,13 @@ window.addEventListener("keydown", (event) => {
 
 // Controls Car Left & Right
 window.addEventListener("keydown", (event) => {
-  if (event.code === "ArrowLeft" || event.code === "KeyA" && game.carDriver.x > 130) {
+  if ((event.code === "ArrowLeft" || event.code === "KeyA") && game.carDriver.x > 130) {
     game.carDriver.moveLeftCar();
   }
 });
 window.addEventListener("keydown", (event) => {
   if (
-    event.code === "ArrowRight"  || event.code === "KeyD" &&
+    (event.code === "ArrowRight"  || event.code === "KeyD") &&
     game.carDriver.x + game.carDriver.w < 410
   ) {
     game.carDriver.moveRightCar();

@@ -59,6 +59,11 @@ input {
     padding: 5px;
     /* margin-bottom: 50px; */
 }
+button:hover,
+input:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
 #start-game div{
     color: rgb(234, 184, 67);
     font-size: 0.5rem;
