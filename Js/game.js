@@ -66,12 +66,14 @@ class Game {
     let ramdomNumForColor = Math.round(Math.random() * 3);
 
     if (Math.floor(this.frames / 50) < 50) {
-      this.framesCarAppear = 130; // 240
+      this.framesCarAppear = 130; 
     } else if (Math.floor(this.frames / 50) > 50) {
-      this.framesCarAppear = 100; // 180
+      this.framesCarAppear = 100; 
     } else if (Math.floor(this.frames / 50) > 100) {
-      this.framesCarAppear = 80; // 120
-    }
+      this.framesCarAppear = 80;
+    } else if (Math.floor(this.frames / 50) > 150) {
+        this.framesCarAppear = 75;
+      }
 
     let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor);
 
@@ -169,8 +171,8 @@ class Game {
   levelUpImgAppear = () => {
     if (
       Math.floor(this.frames / 50) === 50 ||
-      Math.floor(this.frames / 50) === 100
-    ) {
+      Math.floor(this.frames / 50) === 100 ||
+      Math.floor(this.frames / 50) === 150 ) {
       audioLevelUp.play();
       this.levelUp.x = 150;
       let counter = 0;
