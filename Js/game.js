@@ -204,12 +204,12 @@ class Game {
   };
 
   scoreCounter = () => {
-    scoreMaxDOM.innerText = localStorage.maxScore;
+    scoreMaxDOM.innerText = localStorage.getItem("maxScore");
     // scoreMaxDOM.innerText = scoreDOM.innerText;
     scoreDOM.innerText = Math.floor(this.frames / 50);
     if (scoreDOM.innerText > Number(scoreMaxDOM.innerText)) {
       scoreMaxDOM.innerText = scoreDOM.innerText;
-      localStorage.maxScore = scoreMaxDOM.innerText;
+      localStorage.setItem("maxScore" , scoreMaxDOM.innerText);
     }
     // localStorage.clear();
   };

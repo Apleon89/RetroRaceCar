@@ -182,6 +182,7 @@ window.addEventListener("keydown", (event) => {
 });
 
 // Local Storage
-let maxScore;
-localStorage.setItem(maxScore, scoreMaxDOM.innerText);
-localStorage.maxScore = 0
+if(localStorage.getItem("maxScore") === undefined){
+    localStorage.setItem("maxScore", 0);
+}
+
