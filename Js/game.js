@@ -8,8 +8,6 @@ class Game {
     this.crashImg = new CrashImg();
     this.liveUp = new LiveImg();
     this.levelUp = new LevelUp();
-    // this.purpleCarArr = [];
-    // this.greenCarArr = [];
     this.lives = 2;
     this.frames = 1;
     this.framesCarAppear;
@@ -27,53 +25,19 @@ class Game {
     }
   };
 
-  // enemyCarsAppear=()=>{
-  //     let ramdomNumForFrame = Math.floor(Math.random() * 2);
-  //     let ramdomNumWayCar = Math.floor(Math.random() * 4);
-  //     // let ramdomNumForSpeed = Math.floor(Math.random() * 2);
-  //     let ramdomNumForColor = Math.floor(Math.random() * 3);
-  //     let framesCarAppear;
-
-  //     if( scoreDOM.innerText < 50 && ramdomNumForFrame === 0 ){
-  //         framesCarAppear = 247
-  //     } else if ( scoreDOM.innerText < 50 && ramdomNumForFrame === 1 ){
-  //         framesCarAppear = 181
-  //     } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 0) {
-  //         framesCarAppear = 123
-  //     } else if (scoreDOM.innerText > 50 && ramdomNumForFrame === 1 ) {
-  //         framesCarAppear = 61
-  //     } ;
-
-  //     let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor)
-
-  //     if(this.carArr.length === 0 || this.frames % framesCarAppear === 0) {
-  //         if(this.carArr.length === 0){
-  //             this.carArr.push(newCar);
-  //         }
-  //         else if( this.carArr.at(-1).x < newCar.x + newCar.w &&
-  //             this.carArr.at(-1).x + this.carArr.at(-1).w > newCar.x &&
-  //             this.carArr.at(-1).y < newCar.y + newCar.h &&
-  //             this.carArr.at(-1).h + this.carArr.at(-1).y > newCar.y ){
-  //                 this.enemyCarsAppear();
-  //             } else {
-  //                 this.carArr.push(newCar);
-  //         }
-  //     };
-  // };
   enemyCarsAppear = () => {
-    // let ramdomNumForFrame = Math.floor(Math.random() * 2);
     let ramdomNumWayCar = Math.round(Math.random() * 4);
     let ramdomNumForColor = Math.round(Math.random() * 3);
 
     if (Math.floor(this.frames / 50) < 50) {
-      this.framesCarAppear = 130; 
+      this.framesCarAppear = 130;
     } else if (Math.floor(this.frames / 50) > 50) {
-      this.framesCarAppear = 100; 
+      this.framesCarAppear = 100;
     } else if (Math.floor(this.frames / 50) > 100) {
       this.framesCarAppear = 80;
     } else if (Math.floor(this.frames / 50) > 150) {
-        this.framesCarAppear = 75;
-      }
+      this.framesCarAppear = 75;
+    }
 
     let newCar = new EnemyCars(ramdomNumWayCar, ramdomNumForColor);
 
@@ -94,11 +58,6 @@ class Game {
   };
 
   oldCarsDisappear = () => {
-    // if(this.purpleCarArr[0].y > 600){
-    //     this.purpleCarArr.shift();
-    // } else if (this.greenCarArr[0].y > 600){
-    //     this.greenCarArr.shift();
-    // }
     if (this.carArr[0].y > canvas.height) {
       this.carArr.shift();
     }
@@ -112,18 +71,20 @@ class Game {
         this.carDriver.y < eachCar.y + eachCar.h &&
         this.carDriver.h + this.carDriver.y > eachCar.y
       ) {
-        this.crashImg.x = 150;
-        let counter = 0;
-        let showCrashImg = setInterval(() => {
-          counter += 1;
-          this.crashImg.x = -300;
-          if (counter === 1) {
-            clearInterval(showCrashImg);
-          }
-        }, 300);
+        if(this.liveUp.x !== 150){
+          this.crashImg.x = 150;
+          let counter = 0;
+          let showCrashImg = setInterval(() => {
+            counter += 1;
+            this.crashImg.x = -300;
+            if (counter === 1) {
+              clearInterval(showCrashImg);
+            }
+          }, 300);
+        }
         this.carArr.splice(index, 1);
         audioCrash.play();
-        this.lives --;
+        this.lives--;
         this.gameOver();
       }
     });
@@ -146,15 +107,17 @@ class Game {
         this.carDriver.h + this.carDriver.y > eachWrench.y &&
         this.lives < 4
       ) {
-        this.liveUp.x = 150;
-        let counter = 0;
-        let showLiveUp = setInterval(() => {
-          counter += 1;
-          this.liveUp.x = -300;
-          if (counter === 1) {
-            clearInterval(showLiveUp);
-          }
-        }, 300);
+        if(this.crashImg.x !== 150){
+          this.liveUp.x = 150;
+          let counter = 0;
+          let showLiveUp = setInterval(() => {
+            counter += 1;
+            this.liveUp.x = -300;
+            if (counter === 1) {
+              clearInterval(showLiveUp);
+            }
+          }, 300);
+        }
         this.wrenchArr.splice(index, 1);
         this.lives++;
         audioLiveUp.play();
@@ -172,7 +135,8 @@ class Game {
     if (
       Math.floor(this.frames / 50) === 50 ||
       Math.floor(this.frames / 50) === 100 ||
-      Math.floor(this.frames / 50) === 150 ) {
+      Math.floor(this.frames / 50) === 150
+    ) {
       audioLevelUp.play();
       this.levelUp.x = 150;
       let counter = 0;
@@ -203,13 +167,11 @@ class Game {
 
   scoreCounter = () => {
     scoreMaxDOM.innerText = localStorage.getItem("maxScore");
-    // scoreMaxDOM.innerText = scoreDOM.innerText;
     scoreDOM.innerText = Math.floor(this.frames / 50);
     if (scoreDOM.innerText > Number(scoreMaxDOM.innerText)) {
       scoreMaxDOM.innerText = scoreDOM.innerText;
-      localStorage.setItem("maxScore" , scoreMaxDOM.innerText);
+      localStorage.setItem("maxScore", scoreMaxDOM.innerText);
     }
-    // localStorage.clear();
   };
 
   gameLoop = () => {

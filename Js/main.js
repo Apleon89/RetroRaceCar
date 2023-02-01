@@ -147,14 +147,12 @@ window.addEventListener("keyup", (event) => {
 });
 // Deceleration
 window.addEventListener("keydown", (event) => {
-  if (
-    event.code === "ArrowDown") {
+  if (event.code === "ArrowDown") {
     game.carDriver.pressedBottom = true;
   }
 });
 window.addEventListener("keyup", (event) => {
-  if (
-    event.code === "ArrowDown") {
+  if (event.code === "ArrowDown") {
     game.carDriver.pressedBottom = false;
   }
 });
