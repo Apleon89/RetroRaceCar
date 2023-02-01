@@ -27,12 +27,6 @@ class Game {
     }
   };
 
-  // executeMoves = () => {
-  //     Object.keys(controller).forEach(key=> {
-  //       controller[key].pressed && controller[key].func()
-  //     })
-  //   }
-
   // enemyCarsAppear=()=>{
   //     let ramdomNumForFrame = Math.floor(Math.random() * 2);
   //     let ramdomNumWayCar = Math.floor(Math.random() * 4);
@@ -228,7 +222,6 @@ class Game {
 
     this.carDriver.moveLeftCar();
     this.carDriver.moveRightCar();
-    // this.executeMoves();
     this.carDriver.moveUpCar();
     this.carDriver.brakeCar();
     this.carDriver.moveBottomCar();

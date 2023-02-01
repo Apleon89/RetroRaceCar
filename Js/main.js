@@ -60,7 +60,6 @@ restartInstruccions.innerText = "...or press Space to restart";
 restartInstruccions.classList.add("instruccions");
 gameOverScreenDOM.append(restartInstruccions);
 
-
 // State Management Functions
 
 pause = () => {
@@ -92,7 +91,6 @@ mute = () => {
 };
 
 const startGame = () => {
-
   //Cambio de Pantallas
   startScreenDOM.style.display = "none";
   gameOverScreenDOM.style.display = "none";
@@ -151,7 +149,7 @@ window.addEventListener("keyup", (event) => {
 window.addEventListener("keydown", (event) => {
   if (
     event.code === "ArrowDown" &&
-    game.carDriver.y + game.carDriver.h <= 530
+    game.carDriver.y + game.carDriver.h <= 590
   ) {
     game.carDriver.pressedBottom = true;
   }
@@ -159,12 +157,11 @@ window.addEventListener("keydown", (event) => {
 window.addEventListener("keyup", (event) => {
   if (
     event.code === "ArrowDown" &&
-    game.carDriver.y + game.carDriver.h <= 530
+    game.carDriver.y + game.carDriver.h <= 590
   ) {
     game.carDriver.pressedBottom = false;
   }
 });
-
 
 // Pause
 window.addEventListener("keydown", (event) => {
@@ -182,7 +179,6 @@ window.addEventListener("keydown", (event) => {
 });
 
 // Local Storage
-if(localStorage.getItem("maxScore") === undefined){
-    localStorage.setItem("maxScore", 0);
+if (localStorage.getItem("maxScore") === undefined) {
+  localStorage.setItem("maxScore", 0);
 }
-
