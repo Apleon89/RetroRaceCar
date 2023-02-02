@@ -27,7 +27,7 @@ class Game {
 
   enemyCarsAppear = () => {
     let ramdomNumWayCar = Math.round(Math.random() * 4);
-    let ramdomNumForColor = Math.round(Math.random() * 3);
+    let ramdomNumForColor = Math.round(Math.random() * 6);
 
     if (Math.floor(this.frames / 50) < 50) {
       this.framesCarAppear = 130;
