@@ -38,7 +38,6 @@ totalScoreGameOverDOM.append(maxScoreGameOver);
 let muteBtnDOM = document.createElement("input");
 muteDivDOM.append(muteBtnDOM);
 muteBtnDOM.type = "image";
-console.log(localStorage.getItem("volume"))
 if (localStorage.getItem("volume") === "0.05") {
   muteBtnDOM.src = "./Img/SoundOn.png";
 } else {
@@ -96,7 +95,7 @@ mute = () => {
   }
 };
 
-const startGame = () => {
+startGame = () => {
   //Cambio de Pantallas
   startScreenDOM.style.display = "none";
   gameOverScreenDOM.style.display = "none";

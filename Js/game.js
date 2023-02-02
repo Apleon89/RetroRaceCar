@@ -2,7 +2,7 @@ class Game {
   constructor() {
     this.isGameOn = true;
     this.bgArr = [new Bg(-15), new Bg(-615)];
-    this.oilARR = [];
+    this.oilArr = [];
     this.wrenchArr = [];
     this.carDriver = new Car();
     this.carArr = [];
@@ -77,13 +77,8 @@ class Game {
       ) {
         if (this.liveUp.x !== 150) {
           this.crashImg.x = 150;
-          let counter = 0;
-          let showCrashImg = setInterval(() => {
-            counter += 1;
+          setTimeout(() => {
             this.crashImg.x = -300;
-            if (counter === 1) {
-              clearInterval(showCrashImg);
-            }
           }, 300);
         }
         this.carArr.splice(index, 1);
@@ -113,13 +108,8 @@ class Game {
       ) {
         if (this.crashImg.x !== 150) {
           this.liveUp.x = 150;
-          let counter = 0;
-          let showLiveUp = setInterval(() => {
-            counter += 1;
+          setTimeout(() => {
             this.liveUp.x = -300;
-            if (counter === 1) {
-              clearInterval(showLiveUp);
-            }
           }, 300);
         }
         this.wrenchArr.splice(index, 1);
@@ -138,19 +128,19 @@ class Game {
   stainOilAppear = () => {
     let ramdomNumWayOil = Math.floor(Math.random() * 4);
     if (this.frames % 1200 === 0) {
-      this.oilARR.push(new ExtraItem(ramdomNumWayOil, 2.5, 2));
+      this.oilArr.push(new ExtraItem(ramdomNumWayOil, 2.5, 2));
     }
   };
 
   oilColissionCheck = () => {
-    this.oilARR.forEach((eachOil, index) => {
+    this.oilArr.forEach((eachOil, index) => {
       if (
         this.carDriver.x < eachOil.x + eachOil.w &&
         this.carDriver.x + this.carDriver.w > eachOil.x &&
         this.carDriver.y < eachOil.y + eachOil.h &&
         this.carDriver.h + this.carDriver.y > eachOil.y
       ) {
-        this.oilARR.splice(index, 1);
+        this.oilArr.splice(index, 1);
         this.lives = 0;
         this.gameOver();
       }
@@ -158,8 +148,8 @@ class Game {
   };
 
   oldStainOilDisappear = () => {
-    if (this.oilARR.length > 2) {
-      this.wrenchArr.shift();
+    if (this.oilArr.length > 2) {
+      this.oilArr.shift();
     }
   };
 
@@ -169,16 +159,10 @@ class Game {
       Math.floor(this.frames / 50) === 100 ||
       Math.floor(this.frames / 50) === 150
     ) {
-      audioLevelUp.play();
-      this.levelUp.x = 150;
-      let counter = 0;
-      let showLevelUp = setInterval(() => {
-        counter += 1;
+      audioLevelUp.play(); 
+      setTimeout(() => {
         this.levelUp.x = -300;
-        if (counter === 1) {
-          clearInterval(showLevelUp);
-        }
-      }, 10);
+      }, 300);
     }
   };
 
@@ -230,7 +214,7 @@ class Game {
       eachWrench.moveExtraItem();
     });
     this.stainOilAppear();
-    this.oilARR.forEach((eachStain) => {
+    this.oilArr.forEach((eachStain) => {
       eachStain.moveExtraItem();
     });
     this.oilColissionCheck();
@@ -242,7 +226,7 @@ class Game {
     this.bgArr.forEach((eachBg) => {
       eachBg.drawBg();
     });
-    this.oilARR.forEach((eachStain) => {
+    this.oilArr.forEach((eachStain) => {
       eachStain.drawExtraItem();
     });
     this.carDriver.drawCar();
