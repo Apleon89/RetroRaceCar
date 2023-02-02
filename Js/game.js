@@ -6,9 +6,12 @@ class Game {
     this.wrenchArr = [];
     this.carDriver = new Car();
     this.carArr = [];
-    this.crashImg = new CrashImg();
-    this.liveUp = new LiveImg();
-    this.levelUp = new LevelUp();
+    this.crashImg = new ShowImg();
+    this.crashImg.image.src = "./Img/crash.png";
+    this.liveUp = new ShowImg();
+    this.liveUp.image.src = "./Img/heart.png";
+    this.levelUp = new ShowImg();
+    this.levelUp.image.src = "./Img/levelUp.png";
     this.lives = 2;
     this.frames = 1;
     this.framesCarAppear;
@@ -94,7 +97,7 @@ class Game {
   wrenchAppear = () => {
     let ramdomNumWayWrench = Math.floor(Math.random() * 4);
     if (this.frames % 900 === 0 && this.lives < 4) {
-      this.wrenchArr.push(new Wrench(ramdomNumWayWrench));
+      this.wrenchArr.push(new ExtraItem(ramdomNumWayWrench, 2, 1));
     }
   };
 
@@ -135,7 +138,7 @@ class Game {
   stainOilAppear=()=>{
     let ramdomNumWayOil = Math.floor(Math.random() * 4);
     if ( this.frames % 1200 === 0 ) {
-      this.oilARR.push(new StainOil(ramdomNumWayOil));
+      this.oilARR.push(new ExtraItem(ramdomNumWayOil, 2.5, 2));
     }
   };
 
@@ -223,11 +226,11 @@ class Game {
     this.wrenchAppear();
     this.wrenchColissionCheck();
     this.wrenchArr.forEach((eachWrench) => {
-      eachWrench.moveWrench();
+      eachWrench.moveExtraItem();
     });
     this.stainOilAppear();
     this.oilARR.forEach((eachStain)=>{
-      eachStain.moveStainOil()
+      eachStain.moveExtraItem()
     });
     this.oilColissionCheck();
 
@@ -240,7 +243,7 @@ class Game {
       eachBg.drawBg();
     });
     this.oilARR.forEach((eachStain)=>{
-      eachStain.drawStainOil()
+      eachStain.drawExtraItem()
     });
     this.carDriver.drawCar();
     this.enemyCarsAppear();
@@ -248,15 +251,15 @@ class Game {
       eachCar.drawEnemyCar();
     });
     this.wrenchArr.forEach((eachWrench) => {
-      eachWrench.drawWrench();
+      eachWrench.drawExtraItem();
     });
     this.oldCarsDisappear();
     this.oldWrenchDisappear();
     this.oldStainOilDisappear();
     this.scoreCounter();
-    this.crashImg.drawCrashImg();
-    this.liveUp.drawLiveUp();
-    this.levelUp.drawLevelUp();
+    this.crashImg.drawImg();
+    this.liveUp.drawImg();
+    this.levelUp.drawImg();
 
     //4. Recursion
 
