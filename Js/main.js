@@ -38,12 +38,12 @@ totalScoreGameOverDOM.append(maxScoreGameOver);
 let muteBtnDOM = document.createElement("input");
 muteDivDOM.append(muteBtnDOM);
 muteBtnDOM.type = "image";
-if (localStorage.getItem("volume") === 0.05) {
+console.log(localStorage.getItem("volume"))
+if (localStorage.getItem("volume") === "0.05") {
   muteBtnDOM.src = "./Img/SoundOn.png";
 } else {
   muteBtnDOM.src = "./Img/SoundOff.png";
 }
-muteBtnDOM.onclick = "mute()";
 let instruccionsDivDOM = document.createElement("div");
 startScreenDOM.append(instruccionsDivDOM);
 let gameInstruccions = document.createElement("h4");
