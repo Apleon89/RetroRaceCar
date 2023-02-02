@@ -153,6 +153,12 @@ class Game {
     });
   }
 
+  oldStainOilDisappear = () => {
+    if (this.oilARR.length > 2) {
+      this.wrenchArr.shift();
+    }
+  };
+
   levelUpImgAppear = () => {
     if (
       Math.floor(this.frames / 50) === 50 ||
@@ -224,7 +230,7 @@ class Game {
       eachStain.moveStainOil()
     });
     this.oilColissionCheck();
-    
+
 
     this.levelUpImgAppear();
 
@@ -246,6 +252,7 @@ class Game {
     });
     this.oldCarsDisappear();
     this.oldWrenchDisappear();
+    this.oldStainOilDisappear();
     this.scoreCounter();
     this.crashImg.drawCrashImg();
     this.liveUp.drawLiveUp();
