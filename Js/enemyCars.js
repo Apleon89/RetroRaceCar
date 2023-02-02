@@ -26,15 +26,15 @@ class EnemyCars {
       this.image.src = "./Img/Car_Purple.png";
     } else if (color === 1) {
       this.image.src = "./Img/Car_Green.png";
-    } else if ( color === 2 ) {
+    } else if (color === 2) {
       this.image.src = "./Img/Car_Red.png";
-    } else if ( color === 3 ) {
+    } else if (color === 3) {
       this.image.src = "./Img/Car_Brown.png";
-    } else if ( color === 4 ) {
+    } else if (color === 4) {
       this.image.src = "./Img/Car_Green_2.png";
-    } else if ( color === 5 ) {
+    } else if (color === 5) {
       this.image.src = "./Img/Car_Grey.png";
-    } else if ( color === 6 ) {
+    } else if (color === 6) {
       this.image.src = "./Img/Car_Pink.png";
     }
   }

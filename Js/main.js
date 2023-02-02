@@ -22,11 +22,11 @@ let game;
 
 //Audio Volume
 
-audioJuego.volume = 0.05;
-audioCrash.volume = 0.05;
-audioGameOver.volume = 0.05;
-audioLiveUp.volume = 0.05;
-audioLevelUp.volume = 0.05;
+audioJuego.volume = localStorage.getItem("volume");
+audioCrash.volume = localStorage.getItem("volume");
+audioGameOver.volume = localStorage.getItem("volume");
+audioLiveUp.volume = localStorage.getItem("volume");
+audioLevelUp.volume = localStorage.getItem("volume");
 
 // DOM manipulation
 
@@ -38,7 +38,11 @@ totalScoreGameOverDOM.append(maxScoreGameOver);
 let muteBtnDOM = document.createElement("input");
 muteDivDOM.append(muteBtnDOM);
 muteBtnDOM.type = "image";
-muteBtnDOM.src = "./Img/Sound On.png";
+if (localStorage.getItem("volume") === 0.05){
+  muteBtnDOM.src = "/Img/Sound On.png"
+} else {
+  muteBtnDOM.src = "/Img/Sound Off.png" 
+}
 muteBtnDOM.onclick = "mute()";
 let instruccionsDivDOM = document.createElement("div");
 startScreenDOM.append(instruccionsDivDOM);
@@ -80,6 +84,7 @@ mute = () => {
     audioLiveUp.volume = 0.0;
     audioLevelUp.volume = 0.0;
     muteBtnDOM.src = "./Img/Sound Off.png";
+    localStorage.setItem("volume", 0.0);
   } else {
     audioJuego.volume = 0.05;
     audioCrash.volume = 0.05;
@@ -87,6 +92,7 @@ mute = () => {
     audioLiveUp.volume = 0.05;
     audioLevelUp.volume = 0.05;
     muteBtnDOM.src = "./Img/Sound On.png";
+    localStorage.setItem("volume", 0.05);
   }
 };
 
@@ -121,13 +127,16 @@ window.addEventListener("keydown", (event) => {
 
 // Controls Car Left & Right
 window.addEventListener("keydown", (event) => {
-  if ((event.code === "ArrowLeft" || event.code === "KeyA") && game.carDriver.x > 130) {
+  if (
+    (event.code === "ArrowLeft" || event.code === "KeyA") &&
+    game.carDriver.x > 130
+  ) {
     game.carDriver.moveLeftCar();
   }
 });
 window.addEventListener("keydown", (event) => {
   if (
-    (event.code === "ArrowRight"  || event.code === "KeyD") &&
+    (event.code === "ArrowRight" || event.code === "KeyD") &&
     game.carDriver.x + game.carDriver.w < 410
   ) {
     game.carDriver.moveRightCar();
@@ -175,4 +184,7 @@ window.addEventListener("keydown", (event) => {
 // Local Storage
 if (localStorage.getItem("maxScore") === undefined) {
   localStorage.setItem("maxScore", 0);
+}
+if (localStorage.getItem("volume") === undefined ){
+  localStorage.setItem("volume", 0.05);
 }

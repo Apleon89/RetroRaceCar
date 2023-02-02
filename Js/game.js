@@ -75,7 +75,7 @@ class Game {
         this.carDriver.y < eachCar.y + eachCar.h &&
         this.carDriver.h + this.carDriver.y > eachCar.y
       ) {
-        if(this.liveUp.x !== 150){
+        if (this.liveUp.x !== 150) {
           this.crashImg.x = 150;
           let counter = 0;
           let showCrashImg = setInterval(() => {
@@ -111,7 +111,7 @@ class Game {
         this.carDriver.h + this.carDriver.y > eachWrench.y &&
         this.lives < 4
       ) {
-        if(this.crashImg.x !== 150){
+        if (this.crashImg.x !== 150) {
           this.liveUp.x = 150;
           let counter = 0;
           let showLiveUp = setInterval(() => {
@@ -135,26 +135,27 @@ class Game {
     }
   };
 
-  stainOilAppear=()=>{
+  stainOilAppear = () => {
     let ramdomNumWayOil = Math.floor(Math.random() * 4);
-    if ( this.frames % 1200 === 0 ) {
+    if (this.frames % 1200 === 0) {
       this.oilARR.push(new ExtraItem(ramdomNumWayOil, 2.5, 2));
     }
   };
 
-  oilColissionCheck =()=>{
+  oilColissionCheck = () => {
     this.oilARR.forEach((eachOil, index) => {
       if (
         this.carDriver.x < eachOil.x + eachOil.w &&
         this.carDriver.x + this.carDriver.w > eachOil.x &&
         this.carDriver.y < eachOil.y + eachOil.h &&
-        this.carDriver.h + this.carDriver.y > eachOil.y ) {
+        this.carDriver.h + this.carDriver.y > eachOil.y
+      ) {
         this.oilARR.splice(index, 1);
         this.lives = 0;
         this.gameOver();
       }
     });
-  }
+  };
 
   oldStainOilDisappear = () => {
     if (this.oilARR.length > 2) {
@@ -229,11 +230,10 @@ class Game {
       eachWrench.moveExtraItem();
     });
     this.stainOilAppear();
-    this.oilARR.forEach((eachStain)=>{
-      eachStain.moveExtraItem()
+    this.oilARR.forEach((eachStain) => {
+      eachStain.moveExtraItem();
     });
     this.oilColissionCheck();
-
 
     this.levelUpImgAppear();
 
@@ -242,8 +242,8 @@ class Game {
     this.bgArr.forEach((eachBg) => {
       eachBg.drawBg();
     });
-    this.oilARR.forEach((eachStain)=>{
-      eachStain.drawExtraItem()
+    this.oilARR.forEach((eachStain) => {
+      eachStain.drawExtraItem();
     });
     this.carDriver.drawCar();
     this.enemyCarsAppear();
