@@ -38,10 +38,10 @@ totalScoreGameOverDOM.append(maxScoreGameOver);
 let muteBtnDOM = document.createElement("input");
 muteDivDOM.append(muteBtnDOM);
 muteBtnDOM.type = "image";
-if (localStorage.getItem("volume") === 0.05){
-  muteBtnDOM.src = "/Img/Sound On.png"
+if (localStorage.getItem("volume") === 0.05) {
+  muteBtnDOM.src = "./Img/SoundOn.png";
 } else {
-  muteBtnDOM.src = "/Img/Sound Off.png" 
+  muteBtnDOM.src = "./Img/SoundOff.png";
 }
 muteBtnDOM.onclick = "mute()";
 let instruccionsDivDOM = document.createElement("div");
@@ -83,7 +83,7 @@ mute = () => {
     audioGameOver.volume = 0.0;
     audioLiveUp.volume = 0.0;
     audioLevelUp.volume = 0.0;
-    muteBtnDOM.src = "./Img/Sound Off.png";
+    muteBtnDOM.src = "./Img/SoundOff.png";
     localStorage.setItem("volume", 0.0);
   } else {
     audioJuego.volume = 0.05;
@@ -91,7 +91,7 @@ mute = () => {
     audioGameOver.volume = 0.05;
     audioLiveUp.volume = 0.05;
     audioLevelUp.volume = 0.05;
-    muteBtnDOM.src = "./Img/Sound On.png";
+    muteBtnDOM.src = "./Img/SoundOn.png";
     localStorage.setItem("volume", 0.05);
   }
 };
@@ -185,6 +185,6 @@ window.addEventListener("keydown", (event) => {
 if (localStorage.getItem("maxScore") === undefined) {
   localStorage.setItem("maxScore", 0);
 }
-if (localStorage.getItem("volume") === undefined ){
+if (localStorage.getItem("volume") === undefined) {
   localStorage.setItem("volume", 0.05);
 }
