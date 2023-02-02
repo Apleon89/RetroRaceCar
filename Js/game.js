@@ -160,6 +160,7 @@ class Game {
       Math.floor(this.frames / 50) === 150
     ) {
       audioLevelUp.play(); 
+      this.levelUp.x = 150
       setTimeout(() => {
         this.levelUp.x = -300;
       }, 300);
