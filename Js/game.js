@@ -2,6 +2,7 @@ class Game {
   constructor() {
     this.isGameOn = true;
     this.bgArr = [new Bg(-15), new Bg(-615)];
+    this.oilARR = [];
     this.wrenchArr = [];
     this.carDriver = new Car();
     this.carArr = [];
@@ -131,6 +132,27 @@ class Game {
     }
   };
 
+  stainOilAppear=()=>{
+    let ramdomNumWayOil = Math.floor(Math.random() * 4);
+    if ( this.frames % 1200 === 0 ) {
+      this.oilARR.push(new StainOil(ramdomNumWayOil));
+    }
+  };
+
+  oilColissionCheck =()=>{
+    this.oilARR.forEach((eachOil, index) => {
+      if (
+        this.carDriver.x < eachOil.x + eachOil.w &&
+        this.carDriver.x + this.carDriver.w > eachOil.x &&
+        this.carDriver.y < eachOil.y + eachOil.h &&
+        this.carDriver.h + this.carDriver.y > eachOil.y ) {
+        this.oilARR.splice(index, 1);
+        this.lives = 0;
+        this.gameOver();
+      }
+    });
+  }
+
   levelUpImgAppear = () => {
     if (
       Math.floor(this.frames / 50) === 50 ||
@@ -197,12 +219,22 @@ class Game {
     this.wrenchArr.forEach((eachWrench) => {
       eachWrench.moveWrench();
     });
+    this.stainOilAppear();
+    this.oilARR.forEach((eachStain)=>{
+      eachStain.moveStainOil()
+    });
+    this.oilColissionCheck();
+    
+
     this.levelUpImgAppear();
 
     //3. Dibujado de los elementos
 
     this.bgArr.forEach((eachBg) => {
       eachBg.drawBg();
+    });
+    this.oilARR.forEach((eachStain)=>{
+      eachStain.drawStainOil()
     });
     this.carDriver.drawCar();
     this.enemyCarsAppear();
