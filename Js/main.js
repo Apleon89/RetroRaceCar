@@ -1,3 +1,13 @@
+// Local Storage
+
+if (localStorage.getItem("maxScore") === null) {
+  localStorage.setItem("maxScore", 0);
+}
+if (localStorage.getItem("volume") === null) {
+  localStorage.setItem("volume", 0.05);
+}
+
+
 // Global Variables
 
 let startScreenDOM = document.querySelector("#start-game");
@@ -22,11 +32,11 @@ let game;
 
 //Audio Volume
 
-audioJuego.volume = localStorage.getItem("volume");
-audioCrash.volume = localStorage.getItem("volume");
-audioGameOver.volume = localStorage.getItem("volume");
-audioLiveUp.volume = localStorage.getItem("volume");
-audioLevelUp.volume = localStorage.getItem("volume");
+audioJuego.volume = Number(localStorage.getItem("volume"));
+audioCrash.volume = Number(localStorage.getItem("volume"));
+audioGameOver.volume = Number(localStorage.getItem("volume"));
+audioLiveUp.volume = Number(localStorage.getItem("volume"));
+audioLevelUp.volume = Number(localStorage.getItem("volume"));
 
 // DOM manipulation
 
@@ -38,7 +48,9 @@ totalScoreGameOverDOM.append(maxScoreGameOver);
 let muteBtnDOM = document.createElement("input");
 muteDivDOM.append(muteBtnDOM);
 muteBtnDOM.type = "image";
+localStorage.getItem("volume");
 if (localStorage.getItem("volume") === "0.05") {
+  console.log("el volume es 0.05")
   muteBtnDOM.src = "./Img/SoundOn.png";
 } else {
   muteBtnDOM.src = "./Img/SoundOff.png";
@@ -48,7 +60,7 @@ let instruccionsDivDOM = document.createElement("div");
 startScreenDOM.append(instruccionsDivDOM);
 let gameInstruccions = document.createElement("h4");
 instruccionsDivDOM.append(gameInstruccions);
-gameInstruccions.innerText = "Instructions:";
+gameInstruccions.innerText = "INSTRUCTIONS:";
 let leftRightInstruccions = document.createElement("p");
 instruccionsDivDOM.append(leftRightInstruccions);
 leftRightInstruccions.innerText = "Press ⇦ ⇨ to move left & right.";
@@ -57,7 +69,7 @@ instruccionsDivDOM.append(gasBreakInstruccions);
 gasBreakInstruccions.innerText = "Press ⇧ ⇩ to acelerate & brake.";
 let pauseInstruccions = document.createElement("p");
 instruccionsDivDOM.append(pauseInstruccions);
-pauseInstruccions.innerText = "Press P to Pause & press M to mute audio.";
+pauseInstruccions.innerText = "Press P to Pause & press M to unmute/mute audio.";
 
 let restartInstruccions = document.createElement("p");
 restartInstruccions.innerText = "...or press Space to restart";
@@ -181,10 +193,4 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-// Local Storage
-if (localStorage.getItem("maxScore") === undefined) {
-  localStorage.setItem("maxScore", 0);
-}
-if (localStorage.getItem("volume") === undefined) {
-  localStorage.setItem("volume", 0.05);
-}
+
