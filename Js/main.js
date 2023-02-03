@@ -43,6 +43,7 @@ if (localStorage.getItem("volume") === "0.05") {
 } else {
   muteBtnDOM.src = "./Img/SoundOff.png";
 }
+
 let instruccionsDivDOM = document.createElement("div");
 startScreenDOM.append(instruccionsDivDOM);
 let gameInstruccions = document.createElement("h4");
