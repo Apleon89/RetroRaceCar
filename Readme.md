@@ -3,7 +3,7 @@
 RETRO RACE CAR
 
 
-## [Mira el juego](https://apleon89.github.io/RetroRaceCar/)
+## [Prueba el juego](https://apleon89.github.io/RetroRaceCar/)
 
 # Descripción
 
